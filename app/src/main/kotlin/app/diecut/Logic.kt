@@ -9,6 +9,12 @@ object Timing {
     /** Whether a widget with [count] photos, turning every [minutes], is due to move on. */
     fun due(count: Int, minutes: Int, last: Long, now: Long): Boolean =
         count > 1 && minutes > 0 && now - last >= minutes * 60_000L - 60_000L
+
+    /** Whether a widget last [old] ("320x60" dp) is now resized to [w] x [h]: more than a few dp either way. */
+    fun resized(old: String, w: Int, h: Int): Boolean {
+        val (ow, oh) = old.split("x").map { it.toIntOrNull() ?: return true }
+        return kotlin.math.abs(ow - w) > 4 || kotlin.math.abs(oh - h) > 4
+    }
 }
 
 object Grid {
@@ -67,6 +73,14 @@ object Upcoming {
         days.groupBy { next(it, today) }.toSortedMap().entries.take(count).map { (date, people) ->
             Group(date, java.time.temporal.ChronoUnit.DAYS.between(today, date).toInt(), people.sortedBy { it.name.lowercase() })
         }
+
+    /** Month and day from a contact's date: "1990-10-05", "--10-05" (no year), or "19901005". */
+    fun monthDay(s: String): Pair<Int, Int>? {
+        val m = Regex("""(?:\d{4}|-)-?(\d{2})-?(\d{2})""").find(s.trim()) ?: return null
+        val month = m.groupValues[1].toInt()
+        val day = m.groupValues[2].toInt()
+        return if (month in 1..12 && day in 1..31) month to day else null
+    }
 
     /** "Priya", "Priya & Rahul", "Priya, Rahul & Sam". */
     fun names(names: List<String>): String = when (names.size) {

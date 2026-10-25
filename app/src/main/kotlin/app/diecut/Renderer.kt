@@ -389,7 +389,7 @@ object Renderer {
         val rest = if (safe.height() >= 190f) groups.drop(1).take(3) else emptyList()
         val rowH = small * 2f
         val main = RectF(safe.left, safe.top, safe.right, safe.bottom - rest.size * rowH - if (rest.isEmpty()) 0f else small)
-        val bigSize = min(fitSize(big, light, main.width() * if (word) 0.86f else 0.7f), main.height() * if (word) 0.26f else 0.36f)
+        val bigSize = min(fitSize(big, light, main.width() * if (word) 0.86f else 0.7f), main.height() * if (word) 0.26f else 0.42f)
         stack(c, main, listOf(
             Line(big, bigSize, light, pal.ink),
             Line(under, small, medium, soft),

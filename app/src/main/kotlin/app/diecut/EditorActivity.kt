@@ -56,6 +56,7 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
@@ -130,13 +131,15 @@ fun Editor(id: Int, onDone: () -> Unit) {
         }
     }
     var choosingApps by remember { mutableStateOf(false) }
+    // Bumped when the dates change, so the preview (which reads them) redraws.
+    var datesVersion by remember { mutableIntStateOf(0) }
 
     Scaffold(topBar = { TopAppBar(title = { Text("Edit widget") }) }) { pad ->
         Column(
             Modifier.padding(pad).verticalScroll(rememberScrollState()).padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Preview(spec, w, h)
+            Preview(spec, w, h, datesVersion)
 
             Section("Content")
             SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
@@ -212,6 +215,7 @@ fun Editor(id: Int, onDone: () -> Unit) {
                     DatesManager(
                         selected = if (spec.allDates) null else spec.dates,
                         onToggle = { id -> update(spec.copy(dates = if (id in spec.dates) spec.dates - id else spec.dates + id)) },
+                        onChanged = { datesVersion++ },
                     )
                 }
             }
@@ -262,9 +266,9 @@ private fun Toggle(label: String, on: Boolean, set: (Boolean) -> Unit) {
 
 /** The widget as it will look, on a stand-in wallpaper so the cut-outs show. */
 @Composable
-fun Preview(spec: Spec, w: Float, h: Float) {
+fun Preview(spec: Spec, w: Float, h: Float, version: Int = 0) {
     val ctx = LocalContext.current
-    val bmp by produceState<Bitmap?>(null, spec, w, h) {
+    val bmp by produceState<Bitmap?>(null, spec, w to h, version) {
         value = withContext(Dispatchers.Default) {
             Renderer.render(ctx, spec, w, h, ctx.resources.displayMetrics.density, preview = true).bitmap
         }

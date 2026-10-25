@@ -2,6 +2,7 @@ package app.diecut
 
 import android.appwidget.AppWidgetManager
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Color
 import org.json.JSONArray
 import org.json.JSONObject
@@ -155,6 +156,8 @@ object Store {
      */
     fun noteSize(ctx: Context, id: Int, w: Int, h: Int) {
         if (w <= 0 || h <= 0) return
+        // Some launchers (Nothing's) report other sizes while the phone is on its side; that is not a resize.
+        if (ctx.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) return
         val p = prefs(ctx)
         val now = System.currentTimeMillis()
         val old = p.getString("size_$id", null)
@@ -163,7 +166,7 @@ object Store {
         if (placed == 0L) e.putLong("placed_$id", now)
         e.apply()
         // Launchers settle a new widget's size in its first moments; later changes are the person's.
-        if (old != null && old != "${w}x$h" && placed != 0L && now - placed > 15_000) {
+        if (old != null && Timing.resized(old, w, h) && placed != 0L && now - placed > 15_000) {
             val s = spec(ctx, id)
             if (s.fit) put(ctx, id, s.copy(fit = false))
         }

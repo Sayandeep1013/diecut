@@ -103,13 +103,7 @@ object ContactDates {
         return out.distinctBy { it.source }.sortedBy { it.name.lowercase() }
     }
 
-    /** Month and day from a contact's date: "1990-10-05", "--10-05" (no year), or "19901005". */
-    fun monthDay(s: String): Pair<Int, Int>? {
-        val m = Regex("""(?:\d{4}|-)-?(\d{2})-?(\d{2})""").find(s.trim()) ?: return null
-        val month = m.groupValues[1].toInt()
-        val day = m.groupValues[2].toInt()
-        return if (month in 1..12 && day in 1..31) month to day else null
-    }
+    fun monthDay(s: String) = Upcoming.monthDay(s)
 }
 
 /**
