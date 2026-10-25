@@ -194,7 +194,12 @@ fun Editor(id: Int, onDone: () -> Unit) {
                     OutlinedButton(onClick = { choosingApps = true }) {
                         Text(if (spec.apps.isEmpty()) "Choose apps (up to 8)" else "Change apps (${spec.apps.size} of 8)")
                     }
-                    Toggle("Fit the shape to the apps", spec.fit) { update(spec.copy(fit = it)) }
+                    Toggle("Grow with the apps", spec.fit) { update(spec.copy(fit = it)) }
+                    Text(
+                        "Like a dock: the shape gets longer with each app. Resizing the widget on the home screen turns this off and fills the size you set.",
+                        style = MaterialTheme.typography.bodySmall,
+                    )
+                    Toggle("Monochrome icons", spec.mono) { update(spec.copy(mono = it)) }
                     Toggle("Show names", spec.labels) { update(spec.copy(labels = it)) }
                 }
             }

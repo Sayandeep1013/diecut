@@ -27,6 +27,7 @@ abstract class DiecutWidget : AppWidgetProvider() {
     }
 
     override fun onAppWidgetOptionsChanged(ctx: Context, mgr: AppWidgetManager, id: Int, options: Bundle) {
+        Store.noteSize(ctx, id, options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH), options.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT))
         WidgetDraw.draw(ctx, mgr, id)
     }
 

@@ -7,12 +7,18 @@ import android.graphics.BitmapFactory
 import android.graphics.BitmapShader
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Path
+import android.graphics.Rect
 import android.graphics.RectF
 import android.graphics.Shader
 import android.graphics.Typeface
+import android.graphics.drawable.AdaptiveIconDrawable
+import android.graphics.drawable.Drawable
+import android.os.Build
 import android.text.TextPaint
 import android.text.TextUtils
 import android.text.format.DateFormat
@@ -73,7 +79,8 @@ object Renderer {
                 clock = if (spec.clock == ClockStyle.ANALOGUE) analogue(c, safe, pal, preview) else digital(ctx, c, spec, safe, pal, preview)
             }
             Content.APPS -> {
-                ground(c, cut, pal)
+                // Plain paper under the icons, as in the preview (a film still has its frames).
+                if (cut.frames != null) ground(c, cut, pal)
                 taps = apps(ctx, c, spec, cut, u, pal)
             }
         }
@@ -97,17 +104,20 @@ object Renderer {
                 bw = w; bh = min(h, Shape.filmLength(w, n, 1f))
             }
         } else {
-            val m = min(w, h) * 0.12f
+            // Like a dock: each app gets a square cell as big as the widget
+            // allows, and the shape is as long as those cells, so it grows
+            // with every app added until it fills the widget.
+            val m = min(w, h) * 0.08f
             val labelH = if (spec.labels) labelSize(w - 2 * m, h - 2 * m) * 1.6f else 0f
             val fit = Grid.fit(n, w - 2 * m, h - 2 * m, labelH)
-            val cell = fit.icon / 0.72f
-            bw = min(w, fit.cols * cell + 2 * m)
-            bh = min(h, fit.rows * (cell + labelH) + 2 * m)
+            val side = min(fit.cellW, fit.cellH - labelH)
+            bw = min(w, fit.cols * side + 2 * m)
+            bh = min(h, fit.rows * (side + labelH) + 2 * m)
             when (spec.shape) {
                 // Round shapes want to be square.
                 Shape.CIRCLE, Shape.SCALLOP -> { val s = min(max(bw, bh), min(w, h)); bw = s; bh = s }
                 // Room for the notches.
-                Shape.TICKET -> bw = min(w, bw + min(bw, bh) * 0.3f)
+                Shape.TICKET -> if (bw < w) bw = min(w, bw + min(bw, bh) * 0.3f)
                 Shape.ARCH -> bh = min(h, bh + bw * 0.25f)
                 else -> {}
             }
@@ -306,15 +316,15 @@ object Renderer {
                 val rowLeft = safe.left + (safe.width() - inRow * fit.cellW) / 2
                 RectF(rowLeft + col * fit.cellW, safe.top + row * fit.cellH, rowLeft + (col + 1) * fit.cellW, safe.top + (row + 1) * fit.cellH)
             }
-            val iconSize = if (frames != null) min(64f, min(cell.width(), cell.height() - labelH) * 0.66f) else fit.icon
+            val iconSize = if (frames != null) min(72f, min(cell.width(), cell.height() - labelH) * 0.74f) else fit.icon
             val block = iconSize + labelH
             val top = cell.centerY() - block / 2
             val icon = RectF(cell.centerX() - iconSize / 2, top, cell.centerX() + iconSize / 2, top + iconSize)
             // Icons are drawn at full resolution, not through the dp scale.
             c.save()
             c.scale(1 / u, 1 / u)
-            e.second.setBounds((icon.left * u).roundToInt(), (icon.top * u).roundToInt(), (icon.right * u).roundToInt(), (icon.bottom * u).roundToInt())
-            e.second.draw(c)
+            val px = Rect((icon.left * u).roundToInt(), (icon.top * u).roundToInt(), (icon.right * u).roundToInt(), (icon.bottom * u).roundToInt())
+            if (spec.mono) mono(c, e.second, px, pal) else e.second.apply { bounds = px }.draw(c)
             c.restore()
             if (spec.labels) {
                 val shown = TextUtils.ellipsize(e.third, lp, cell.width() * 0.94f, TextUtils.TruncateAt.END).toString()
@@ -323,6 +333,25 @@ object Renderer {
             taps += Tap(cell, e.first)
         }
         return taps
+    }
+
+    /**
+     * An app icon in one colour, like Android's themed icons: the app's own
+     * monochrome glyph in ink on a soft disc, or (an app without one) its
+     * icon in greys.
+     */
+    private fun mono(c: Canvas, icon: Drawable, px: Rect, pal: Palette) {
+        val glyph = if (Build.VERSION.SDK_INT >= 33) (icon as? AdaptiveIconDrawable)?.monochrome else null
+        if (glyph != null) {
+            c.drawCircle(px.exactCenterX(), px.exactCenterY(), px.width() / 2f, fill(mix(pal.paper, pal.ink, 0.12f)))
+            glyph.mutate().apply { bounds = px; setTint(pal.ink) }.draw(c)
+            return
+        }
+        val grey = Paint().apply { colorFilter = ColorMatrixColorFilter(ColorMatrix().apply { setSaturation(0f) }) }
+        c.saveLayer(RectF(px), grey)
+        icon.bounds = px
+        icon.draw(c)
+        c.restore()
     }
 
     // ------------------------------------------------------------- helpers
