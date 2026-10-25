@@ -60,16 +60,18 @@ Things learned there:
 - Commit and push only when the user asks. Work on a branch and open a PR, as in
   TomeVoice.
 
-## Open questions for the first session
+## Decisions (settled in the first session, 2026-10-26)
 
-1. **Stack.** Widgets are native whatever the app is written in (RemoteViews from
-   Kotlin). Native Kotlin with Jetpack Compose for the app screens is the simplest
-   fit. Flutter, as in TomeVoice, would still need all the widget code in Kotlin.
-2. Package name and app id (`app.diecut`?) and the minimum Android version. Android
-   12 (API 31) brings movable tap targets and nicer widget APIs.
-3. Which shapes and content types ship first. A good first slice: a photo in a
-   postage stamp, end to end, on the phone.
-4. The editor: how a shape, its colours and its content are picked, with a live
-   preview of the widget.
-5. Is it free, paid, or free with a few shapes and more unlocked later?
-6. A new GitHub repo for it, and when.
+1. **Stack**: native Kotlin, Jetpack Compose for the app's screens, no Gradle wrapper
+   committed (CI picks Gradle 8.13). AGP 8.11, Kotlin 2.2, compile/target SDK 36.
+2. **App id** `app.diecut`, **minSdk 31** (Android 12: movable tap targets).
+3. **Content**: photo, clock, apps, dates (birthdays and special days). **Shapes**:
+   stamp, film, polaroid, frame, circle, squircle, ticket, scallop, arch.
+4. **Editor**: the configuration activity, with a live preview from the same renderer.
+5. **Price**: not decided; shapes live in one enum so some can be locked later.
+6. **Repo**: github.com/Sayandeep1013/diecut (private for now). The release key is
+   kept outside the repo in `~/.diecut/` and in the repo's secrets.
+
+Also learned here: analogue hands work as `AnalogClock` icons (`setDial`,
+`setHourHand`, `setMinuteHand`) on the Nothing launcher. `tools/art.py` draws the icon,
+the picker previews and the confetti; `tools/showcase.py` draws the README pictures.
