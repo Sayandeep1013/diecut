@@ -104,7 +104,7 @@ private val shortDate = DateTimeFormatter.ofPattern("EEE d MMM")
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun DatesManager(selected: List<String>?, onToggle: ((String) -> Unit)?) {
+fun DatesManager(selected: List<String>?, onToggle: ((String) -> Unit)?, onChanged: () -> Unit = {}) {
     val ctx = LocalContext.current
     var days by remember { mutableStateOf(DayBook.all(ctx)) }
     var editing by remember { mutableStateOf<Day?>(null) }
@@ -112,6 +112,7 @@ fun DatesManager(selected: List<String>?, onToggle: ((String) -> Unit)?) {
     val notify = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {}
     fun changed() {
         days = DayBook.all(ctx)
+        onChanged()
         DayAlarms.schedule(ctx)
         // The morning reminder needs notifications; asked once there is something to remind of.
         if (ctx.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != android.content.pm.PackageManager.PERMISSION_GRANTED) {

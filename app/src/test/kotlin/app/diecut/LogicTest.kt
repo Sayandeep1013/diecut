@@ -82,6 +82,22 @@ class UpcomingTest {
     }
 
     @Test
+    fun contactDates() {
+        assertEquals(10 to 5, Upcoming.monthDay("1990-10-05"))
+        assertEquals(10 to 5, Upcoming.monthDay("--10-05"))
+        assertEquals(10 to 5, Upcoming.monthDay("19901005"))
+        assertEquals(2 to 29, Upcoming.monthDay("2000-02-29T00:00:00Z"))
+        assertEquals(null, Upcoming.monthDay("1990-13-05"))
+        assertEquals(null, Upcoming.monthDay("soon"))
+    }
+
+    @Test
+    fun aFewDpIsNotAResize() {
+        assertFalse(Timing.resized("320x60", 322, 58))
+        assertTrue(Timing.resized("320x60", 250, 60))
+    }
+
+    @Test
     fun aSpecialDayIsItsName() =
         assertEquals("Trip to Goa", Upcoming.occasion(listOf(Day("a", "Trip to Goa", 12, 20, Day.Kind.SPECIAL))))
 }
