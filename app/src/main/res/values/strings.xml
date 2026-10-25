@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_face">Diecut widget</string>
+    <string name="widget_tap">Open app</string>
+    <string name="widget_photo">A photo, cut to a shape</string>
+    <string name="widget_clock">A clock, cut to a shape</string>
+    <string name="widget_apps">Your apps, cut to a shape</string>
+</resources>

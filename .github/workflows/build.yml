@@ -1,0 +1,69 @@
+name: build
+
+# main, pull requests, tags and a manual "Run workflow". Docs-only changes never build.
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+    paths-ignore: ["**/*.md", "docs/**"]
+  pull_request:
+    paths-ignore: ["**/*.md", "docs/**"]
+  workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  apk:
+    name: Android APK
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      # No wrapper is committed (nobody here runs Gradle locally); CI picks the version.
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.13"
+
+      # A stable key means each build installs over the last one.
+      - name: Restore signing key
+        env:
+          DIECUT_KEYSTORE_B64: ${{ secrets.DIECUT_KEYSTORE_B64 }}
+        run: |
+          if [ -n "$DIECUT_KEYSTORE_B64" ]; then
+            echo "$DIECUT_KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/diecut.p12"
+            echo "DIECUT_KEYSTORE=$RUNNER_TEMP/diecut.p12" >> "$GITHUB_ENV"
+          else
+            echo "::warning::DIECUT_KEYSTORE_B64 is not set; the APK is signed with a throwaway debug key."
+          fi
+
+      - name: Unit tests
+        run: gradle --no-daemon testReleaseUnitTest
+
+      - name: Build release APK
+        env:
+          DIECUT_KEYSTORE_PASSWORD: ${{ secrets.DIECUT_KEYSTORE_PASSWORD }}
+        run: |
+          gradle --no-daemon assembleRelease
+          cp app/build/outputs/apk/release/app-release.apk "$RUNNER_TEMP/diecut.apk"
+          ls -la "$RUNNER_TEMP/diecut.apk"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: diecut-apk
+          path: ${{ runner.temp }}/diecut.apk
+          if-no-files-found: error
+
+      - name: Attach to release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${GITHUB_REF_NAME}" "$RUNNER_TEMP/diecut.apk#diecut-${GITHUB_REF_NAME}.apk" --generate-notes
