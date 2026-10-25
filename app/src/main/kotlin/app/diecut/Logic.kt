@@ -18,13 +18,13 @@ object Grid {
      * The grid that gives [n] icons the biggest size in a [w] x [h] dp area,
      * with [labelH] dp under each icon for its name (0 for none).
      */
-    fun fit(n: Int, w: Float, h: Float, labelH: Float, maxIcon: Float = 64f): Fit {
+    fun fit(n: Int, w: Float, h: Float, labelH: Float, maxIcon: Float = 72f): Fit {
         var best = Fit(1, 1, w, h, 0f)
         for (cols in 1..max(1, n)) {
             val rows = ceil(max(1, n) / cols.toFloat()).toInt()
             val cw = w / cols
             val ch = h / rows
-            val icon = min(min(cw, ch - labelH) * 0.72f, maxIcon)
+            val icon = min(min(cw, ch - labelH) * 0.86f, maxIcon)
             if (icon > best.icon) best = Fit(cols, rows, cw, ch, icon)
         }
         return best

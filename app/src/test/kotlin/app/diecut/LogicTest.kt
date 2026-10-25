@@ -35,7 +35,7 @@ class LogicTest {
     }
 
     @Test
-    fun iconsAreCapped() = assertEquals(64f, Grid.fit(1, 400f, 400f, 0f).icon, 0.01f)
+    fun iconsAreCapped() = assertEquals(72f, Grid.fit(1, 400f, 400f, 0f).icon, 0.01f)
 
     @Test
     fun stepsHaveAFloor() = assertEquals(2, Grid.steps(5f, 10f, 2))

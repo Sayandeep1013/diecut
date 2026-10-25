@@ -34,8 +34,10 @@ data class Spec(
     /** Flattened component names of the apps to open. */
     val apps: List<String> = emptyList(),
     val labels: Boolean = false,
-    /** Shrink the shape around the apps instead of filling the widget. */
+    /** Grow the shape with the apps, like a dock, instead of filling the widget. Resizing the widget turns it off. */
     val fit: Boolean = true,
+    /** App icons in one colour. */
+    val mono: Boolean = false,
 ) {
     fun currentPhoto(): String? = if (photos.isEmpty()) null else photos[photoIndex.mod(photos.size)]
 
@@ -52,6 +54,7 @@ data class Spec(
         put("apps", JSONArray(apps))
         put("labels", labels)
         put("fit", fit)
+        put("mono", mono)
     }.toString()
 
     companion object {
@@ -71,6 +74,7 @@ data class Spec(
                 apps = list("apps"),
                 labels = o.optBoolean("labels"),
                 fit = o.optBoolean("fit", true),
+                mono = o.optBoolean("mono"),
             )
         } catch (e: Exception) {
             null
@@ -120,7 +124,7 @@ object Store {
 
     fun delete(ctx: Context, id: Int) {
         prefs(ctx).getString("spec_$id", null)?.let { Spec.fromJson(it) }?.photos?.forEach { File(photoDir(ctx), it).delete() }
-        prefs(ctx).edit().remove("spec_$id").apply()
+        prefs(ctx).edit().remove("spec_$id").remove("size_$id").remove("placed_$id").apply()
     }
 
     /** Move on to the next photo. */
@@ -133,6 +137,27 @@ object Store {
     fun turnIfDue(ctx: Context, id: Int) {
         val s = spec(ctx, id)
         if (Timing.due(s.photos.size, s.turnMinutes, s.lastTurn, System.currentTimeMillis())) next(ctx, id)
+    }
+
+    /**
+     * Note the size the launcher gives a widget. A change well after it was
+     * placed is the person resizing it, which turns growing with the apps off:
+     * they chose the size.
+     */
+    fun noteSize(ctx: Context, id: Int, w: Int, h: Int) {
+        if (w <= 0 || h <= 0) return
+        val p = prefs(ctx)
+        val now = System.currentTimeMillis()
+        val old = p.getString("size_$id", null)
+        val placed = p.getLong("placed_$id", 0L)
+        val e = p.edit().putString("size_$id", "${w}x$h")
+        if (placed == 0L) e.putLong("placed_$id", now)
+        e.apply()
+        // Launchers settle a new widget's size in its first moments; later changes are the person's.
+        if (old != null && old != "${w}x$h" && placed != 0L && now - placed > 15_000) {
+            val s = spec(ctx, id)
+            if (s.fit) put(ctx, id, s.copy(fit = false))
+        }
     }
 
     /** A widget just pinned from the app, to set up when the app comes back. */
