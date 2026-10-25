@@ -142,30 +142,26 @@ def preview_clock():
 
 
 def preview_apps():
-    """A film strip with four apps, one to a frame (Shape.film in Shapes.kt)."""
-    h = 150
-    band, gap = h * 0.17, h * 0.17 * 0.3
-    frame = h - 2 * band
-    w = round(4 * frame + 5 * gap)
-    W, H, B, G, F = w * SS, h * SS, band * SS, gap * SS, frame * SS
-    mask = Image.new("L", (W, H), 0)
+    """A cream ticket with four apps spread along it (Shape.TICKET in Shapes.kt)."""
+    w, h = 600, 150
+    W, H = w * SS, h * SS
+    s = min(W, H)
+    corner, notch = s * 0.09, s * 0.11
+    mask = Image.new("L", (W, H), 255)
     md = ImageDraw.Draw(mask)
-    md.rounded_rectangle((0, 0, W - 1, H - 1), radius=3 * SS, fill=255)
-    hl, hs = B * 0.46, B * 0.42
-    n = max(2, round(W / (B * 0.95)))
-    for i in range(n):
-        a = W * (i + 0.5) / n
-        for c in (B / 2, H - B / 2):
-            md.rounded_rectangle((a - hl / 2, c - hs / 2, a + hl / 2, c + hs / 2), radius=hs * 0.28, fill=0)
-    img = Image.new("RGBA", (W, H), (27, 27, 29, 255))
+    for cx, cy in ((0, 0), (W, 0), (0, H), (W, H)):
+        md.ellipse((cx - corner, cy - corner, cx + corner, cy + corner), fill=0)
+    for cx in (0, W):
+        md.ellipse((cx - notch, H / 2 - notch, cx + notch, H / 2 + notch), fill=0)
+    img = Image.new("RGBA", (W, H), (243, 233, 210, 255))
     d = ImageDraw.Draw(img)
     colours = [(200, 64, 47), (35, 50, 79), (169, 191, 161), (226, 177, 60)]
+    left, right = notch + s * 0.1, W - notch - s * 0.1
+    cell = (right - left) / 4
+    size = min(cell, H) * 0.56
     for i, c in enumerate(colours):
-        x0 = G + i * (F + G)
-        d.rounded_rectangle((x0, B, x0 + F, H - B), radius=2 * SS, fill=(55, 55, 56, 255))
-        size = F * 0.66
-        cx, cy = x0 + F / 2, H / 2
-        d.rounded_rectangle((cx - size / 2, cy - size / 2, cx + size / 2, cy + size / 2), radius=size * 0.3, fill=c + (255,))
+        cx = left + cell * (i + 0.5)
+        d.rounded_rectangle((cx - size / 2, H / 2 - size / 2, cx + size / 2, H / 2 + size / 2), radius=size * 0.3, fill=c + (255,))
     img.putalpha(mask)
     save(img, "widget_preview_apps", w, h)
 

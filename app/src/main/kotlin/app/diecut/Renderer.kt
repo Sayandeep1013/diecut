@@ -73,7 +73,8 @@ object Renderer {
                 clock = if (spec.clock == ClockStyle.ANALOGUE) analogue(c, safe, pal, preview) else digital(ctx, c, spec, safe, pal, preview)
             }
             Content.APPS -> {
-                ground(c, cut, pal)
+                // Plain paper under the icons, as in the preview (a film still has its frames).
+                if (cut.frames != null) ground(c, cut, pal)
                 taps = apps(ctx, c, spec, cut, u, pal)
             }
         }
@@ -99,15 +100,19 @@ object Renderer {
         } else {
             val m = min(w, h) * 0.12f
             val labelH = if (spec.labels) labelSize(w - 2 * m, h - 2 * m) * 1.6f else 0f
+            // The apps spread over the whole widget, as in the picker's preview,
+            // unless that would leave each one in a cell more than twice as
+            // long as it is wide: then the shape draws in around them.
             val fit = Grid.fit(n, w - 2 * m, h - 2 * m, labelH)
-            val cell = fit.icon / 0.72f
-            bw = min(w, fit.cols * cell + 2 * m)
-            bh = min(h, fit.rows * (cell + labelH) + 2 * m)
+            val cw = min(fit.cellW, fit.cellH * 2f)
+            val ch = min(fit.cellH, fit.cellW * 2f)
+            bw = min(w, fit.cols * cw + 2 * m)
+            bh = min(h, fit.rows * ch + 2 * m)
             when (spec.shape) {
                 // Round shapes want to be square.
                 Shape.CIRCLE, Shape.SCALLOP -> { val s = min(max(bw, bh), min(w, h)); bw = s; bh = s }
                 // Room for the notches.
-                Shape.TICKET -> bw = min(w, bw + min(bw, bh) * 0.3f)
+                Shape.TICKET -> if (bw < w) bw = min(w, bw + min(bw, bh) * 0.3f)
                 Shape.ARCH -> bh = min(h, bh + bw * 0.25f)
                 else -> {}
             }

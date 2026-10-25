@@ -79,7 +79,7 @@ data class Spec(
         fun defaultFor(content: Content) = when (content) {
             Content.PHOTO -> Spec(content, Shape.STAMP, "paper")
             Content.CLOCK -> Spec(content, Shape.CIRCLE, "ink")
-            Content.APPS -> Spec(content, Shape.FILM, "ink")
+            Content.APPS -> Spec(content, Shape.TICKET, "cream")
         }
     }
 }
