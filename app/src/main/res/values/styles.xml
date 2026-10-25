@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Diecut" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="WidgetTime">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:format12Hour">h:mm</item>
+        <item name="android:format24Hour">H:mm</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="WidgetTap">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_gravity">top|start</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:contentDescription">@string/widget_tap</item>
+        <item name="android:visibility">gone</item>
+    </style>
+</resources>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Every Diecut widget. The face is one picture drawn by Renderer.kt; the live
+  clock and the tap targets are moved over the places drawn for them.
+  No @android:id/background: on Android 12+ that opts into the launcher's
+  rounded clipping, which would cut the shape.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/face"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/widget_face"
+        android:scaleType="fitXY" />
+
+    <AnalogClock
+        android:id="@+id/clock_analog"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="top|start"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/clock_box"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="top|start"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextClock
+            android:id="@+id/time_light"
+            style="@style/WidgetTime"
+            android:fontFamily="sans-serif-light" />
+
+        <TextClock
+            android:id="@+id/time_bold"
+            style="@style/WidgetTime"
+            android:fontFamily="sans-serif-black" />
+
+        <TextClock
+            android:id="@+id/time_serif"
+            style="@style/WidgetTime"
+            android:fontFamily="serif" />
+
+        <TextClock
+            android:id="@+id/time_condensed"
+            style="@style/WidgetTime"
+            android:fontFamily="sans-serif-condensed" />
+
+        <TextClock
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:format12Hour="EEE d MMM"
+            android:format24Hour="EEE d MMM"
+            android:includeFontPadding="false"
+            android:maxLines="1" />
+    </LinearLayout>
+
+    <ImageButton android:id="@+id/tap0" style="@style/WidgetTap" />
+    <ImageButton android:id="@+id/tap1" style="@style/WidgetTap" />
+    <ImageButton android:id="@+id/tap2" style="@style/WidgetTap" />
+    <ImageButton android:id="@+id/tap3" style="@style/WidgetTap" />
+    <ImageButton android:id="@+id/tap4" style="@style/WidgetTap" />
+    <ImageButton android:id="@+id/tap5" style="@style/WidgetTap" />
+    <ImageButton android:id="@+id/tap6" style="@style/WidgetTap" />
+    <ImageButton android:id="@+id/tap7" style="@style/WidgetTap" />
+</FrameLayout>
