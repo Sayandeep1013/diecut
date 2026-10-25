@@ -7,7 +7,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
 
-enum class Content(val label: String) { PHOTO("Photo"), CLOCK("Clock"), APPS("Apps") }
+enum class Content(val label: String) { PHOTO("Photo"), CLOCK("Clock"), APPS("Apps"), DATES("Dates") }
 
 /** How a clock shows the time. The digital ones are system fonts, which a widget's TextClock can use. */
 enum class ClockStyle(val label: String, val family: String?) {
@@ -38,6 +38,9 @@ data class Spec(
     val fit: Boolean = true,
     /** App icons in one colour. */
     val mono: Boolean = false,
+    /** Follow every date in the book, or only [dates] (their ids). */
+    val allDates: Boolean = true,
+    val dates: List<String> = emptyList(),
 ) {
     fun currentPhoto(): String? = if (photos.isEmpty()) null else photos[photoIndex.mod(photos.size)]
 
@@ -55,6 +58,8 @@ data class Spec(
         put("labels", labels)
         put("fit", fit)
         put("mono", mono)
+        put("allDates", allDates)
+        put("dates", JSONArray(dates))
     }.toString()
 
     companion object {
@@ -75,6 +80,8 @@ data class Spec(
                 labels = o.optBoolean("labels"),
                 fit = o.optBoolean("fit", true),
                 mono = o.optBoolean("mono"),
+                allDates = o.optBoolean("allDates", true),
+                dates = list("dates"),
             )
         } catch (e: Exception) {
             null
@@ -84,6 +91,7 @@ data class Spec(
             Content.PHOTO -> Spec(content, Shape.STAMP, "paper")
             Content.CLOCK -> Spec(content, Shape.CIRCLE, "ink")
             Content.APPS -> Spec(content, Shape.TICKET, "cream")
+            Content.DATES -> Spec(content, Shape.SCALLOP, "blush")
         }
     }
 }
@@ -102,6 +110,7 @@ object Store {
         return when (cls) {
             ClockWidget::class.java.name -> Content.CLOCK
             AppsWidget::class.java.name -> Content.APPS
+            DatesWidget::class.java.name -> Content.DATES
             else -> Content.PHOTO
         }
     }

@@ -17,6 +17,26 @@
         android:contentDescription="@string/widget_face"
         android:scaleType="fitXY" />
 
+    <ProgressBar
+        android:id="@+id/confetti"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:indeterminateOnly="true"
+        android:indeterminateDrawable="@drawable/confetti"
+        android:maxWidth="10000dp"
+        android:maxHeight="10000dp"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/confetti_wide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:indeterminateOnly="true"
+        android:indeterminateDrawable="@drawable/confetti_wide"
+        android:maxWidth="10000dp"
+        android:maxHeight="10000dp"
+        android:visibility="gone" />
+
     <AnalogClock
         android:id="@+id/clock_analog"
         android:layout_width="0dp"

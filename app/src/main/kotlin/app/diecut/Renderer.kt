@@ -19,10 +19,14 @@ import android.graphics.Typeface
 import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.text.Layout
+import android.text.StaticLayout
 import android.text.TextPaint
 import android.text.TextUtils
 import android.text.format.DateFormat
 import java.io.File
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Date
 import kotlin.math.cos
@@ -38,8 +42,8 @@ class Tap(val rect: RectF, val component: String)
 /** Where a live clock sits over the face, in dp, and how big its type is. */
 class ClockPlace(val rect: RectF, val timeSize: Float, val dateSize: Float)
 
-/** A drawn widget: the picture, and what the RemoteViews lay over it. */
-class Face(val bitmap: Bitmap, val u: Float, val taps: List<Tap>, val clock: ClockPlace?)
+/** A drawn widget: the picture, and what the RemoteViews lay over it ([party]: confetti, it is someone's day). */
+class Face(val bitmap: Bitmap, val u: Float, val taps: List<Tap>, val clock: ClockPlace?, val party: Boolean = false)
 
 /**
  * Draws a widget's face: the shape is one bitmap, and the wallpaper shows
@@ -70,6 +74,7 @@ object Renderer {
         cut.band?.let { c.drawPath(it, fill(pal.ink)) }
         var taps = emptyList<Tap>()
         var clock: ClockPlace? = null
+        var party = false
         when (spec.content) {
             Content.PHOTO -> photo(ctx, c, spec, cut, u, pal)
             Content.CLOCK -> {
@@ -77,6 +82,10 @@ object Renderer {
                 // A film's clock sits in its middle frame.
                 val safe = cut.frames?.let { it[it.size / 2] } ?: cut.safe
                 clock = if (spec.clock == ClockStyle.ANALOGUE) analogue(c, safe, pal, preview) else digital(ctx, c, spec, safe, pal, preview)
+            }
+            Content.DATES -> {
+                ground(c, cut, pal)
+                party = dates(ctx, c, spec, cut.frames?.let { it[it.size / 2] } ?: cut.safe, pal)
             }
             Content.APPS -> {
                 // Plain paper under the icons, as in the preview (a film still has its frames).
@@ -87,7 +96,7 @@ object Renderer {
         val dx = box.left
         val dy = box.top
         fun RectF.moved() = RectF(left + dx, top + dy, right + dx, bottom + dy)
-        return Face(bmp, u, taps.map { Tap(it.rect.moved(), it.component) }, clock?.let { ClockPlace(it.rect.moved(), it.timeSize, it.dateSize) })
+        return Face(bmp, u, taps.map { Tap(it.rect.moved(), it.component) }, clock?.let { ClockPlace(it.rect.moved(), it.timeSize, it.dateSize) }, party)
     }
 
     /** Where in a [w] x [h] dp widget the shape goes. */
@@ -333,6 +342,111 @@ object Renderer {
             taps += Tap(cell, e.first)
         }
         return taps
+    }
+
+    private class Line(val text: String, val size: Float, val face: Typeface, val color: Int, val lines: Int = 1)
+
+    /**
+     * The next date and how far off it is. Tall widgets list the ones after
+     * it; wide ones put the count on the left. On the day it says so, with
+     * any message saved for it. Returns whether today is someone's day.
+     */
+    private fun dates(ctx: Context, c: Canvas, spec: Spec, safe: RectF, pal: Palette): Boolean {
+        val groups = Upcoming.groups(DayBook.forSpec(ctx, spec), LocalDate.now(), 4)
+        if (groups.isEmpty()) {
+            centred(c, "Tap to add dates", safe, min(13f, safe.width() / 10f), pal.ink, Typeface.DEFAULT)
+            return false
+        }
+        val g = groups[0]
+        val light = Typeface.create("sans-serif-light", Typeface.NORMAL)
+        val medium = Typeface.create("sans-serif-medium", Typeface.NORMAL)
+        val italic = Typeface.create(Typeface.SERIF, Typeface.ITALIC)
+        val soft = (pal.ink and 0x00FFFFFF) or (0xB0 shl 24)
+        val big = when (g.daysAway) { 0 -> "Today"; 1 -> "Tomorrow"; else -> "${g.daysAway}" }
+        val under = if (g.daysAway > 1) "days to go" else ""
+        val note = if (g.daysAway == 0) g.people.map { it.message.trim() }.filter { it.isNotEmpty() }.joinToString("\n") else ""
+        val date = g.date.format(DateTimeFormatter.ofPattern("EEE d MMM"))
+        val word = g.daysAway <= 1
+        if (safe.width() >= safe.height() * 1.8f) {
+            // Wide: the count on the left, what and when on the right.
+            val left = RectF(safe.left, safe.top, safe.left + min(safe.height() * 1.15f, safe.width() * 0.38f), safe.bottom)
+            val bigSize = min(fitSize(big, light, left.width() * 0.9f), safe.height() * if (word) 0.32f else 0.62f)
+            val small = (safe.height() * 0.13f).coerceIn(8f, 13f)
+            stack(c, left, listOf(Line(big, bigSize, light, pal.ink), Line(under, small, medium, soft)), Layout.Alignment.ALIGN_CENTER)
+            val right = RectF(left.right + safe.height() * 0.12f, safe.top, safe.right, safe.bottom)
+            val after = groups.getOrNull(1)
+            val next = after?.let { "Then ${Upcoming.names(it.people.map { p -> p.name })} · ${away(it.daysAway)}" }
+            stack(c, right, listOfNotNull(
+                Line(Upcoming.occasion(g.people), small * 1.3f, medium, pal.ink, 2),
+                Line(date, small, Typeface.DEFAULT, soft),
+                if (note.isNotEmpty()) Line(note, small * 1.05f, italic, pal.ink, 2) else null,
+                if (note.isEmpty() && next != null && safe.height() >= 90) Line(next, small * 0.95f, Typeface.DEFAULT, soft) else null,
+            ), Layout.Alignment.ALIGN_NORMAL)
+            return g.daysAway == 0
+        }
+        // Stacked; a tall widget lists the dates after it along the foot.
+        val small = (min(safe.width(), safe.height()) * 0.075f).coerceIn(8.5f, 14f)
+        val rest = if (safe.height() >= 190f) groups.drop(1).take(3) else emptyList()
+        val rowH = small * 2f
+        val main = RectF(safe.left, safe.top, safe.right, safe.bottom - rest.size * rowH - if (rest.isEmpty()) 0f else small)
+        val bigSize = min(fitSize(big, light, main.width() * if (word) 0.86f else 0.7f), main.height() * if (word) 0.26f else 0.36f)
+        stack(c, main, listOf(
+            Line(big, bigSize, light, pal.ink),
+            Line(under, small, medium, soft),
+            Line(Upcoming.occasion(g.people), small * 1.3f, medium, pal.ink, 2),
+            Line(date, small, Typeface.DEFAULT, soft),
+            Line(note, small * 1.05f, italic, pal.ink, 3),
+        ), Layout.Alignment.ALIGN_CENTER)
+        if (rest.isNotEmpty()) {
+            val pen = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = pal.ink; alpha = 50; strokeWidth = 1f }
+            var y = main.bottom + small * 0.5f
+            c.drawLine(safe.left + small, y, safe.right - small, y, pen)
+            for (r in rest) {
+                val whenText = away(r.daysAway)
+                val row = RectF(safe.left + small, y, safe.right - small, y + rowH)
+                val whenW = TextPaint().apply { textSize = small; typeface = Typeface.DEFAULT }.measureText(whenText) + small
+                stack(c, RectF(row.left, row.top, row.right - whenW, row.bottom), listOf(Line(Upcoming.names(r.people.map { it.name }), small, medium, pal.ink)), Layout.Alignment.ALIGN_NORMAL)
+                stack(c, RectF(row.right - whenW, row.top, row.right, row.bottom), listOf(Line(whenText, small, Typeface.DEFAULT, soft)), Layout.Alignment.ALIGN_OPPOSITE)
+                y += rowH
+            }
+        }
+        return g.daysAway == 0
+    }
+
+    private fun away(days: Int) = if (days == 1) "tomorrow" else "$days days"
+
+    /** The size [s] would be in [face] to be [width] wide. */
+    private fun fitSize(s: String, face: Typeface, width: Float): Float {
+        val w = TextPaint().apply { textSize = 100f; typeface = face }.measureText(s)
+        return if (w <= 0f) 12f else 100f * width / w
+    }
+
+    /** [lines] one under another, centred down [r] (smaller all round if they would not fit). */
+    private fun stack(c: Canvas, r: RectF, lines: List<Line>, align: Layout.Alignment) {
+        val shown = lines.filter { it.text.isNotEmpty() }
+        if (shown.isEmpty() || r.width() < 1f) return
+        fun layouts(k: Float) = shown.map { l ->
+            val tp = TextPaint(Paint.ANTI_ALIAS_FLAG).apply { textSize = l.size * k; typeface = l.face; color = l.color }
+            StaticLayout.Builder.obtain(l.text, 0, l.text.length, tp, r.width().toInt())
+                .setAlignment(align).setMaxLines(l.lines).setEllipsize(TextUtils.TruncateAt.END).setIncludePad(false).build()
+        }
+        val gap = shown.minOf { it.size } * 0.3f
+        var k = 1f
+        var ls = layouts(k)
+        var total = ls.sumOf { it.height } + gap * (ls.size - 1)
+        if (total > r.height()) {
+            k = r.height() / total
+            ls = layouts(k)
+            total = ls.sumOf { it.height } + gap * k * (ls.size - 1)
+        }
+        var y = r.centerY() - total / 2
+        for (l in ls) {
+            c.save()
+            c.translate(r.left, y)
+            l.draw(c)
+            c.restore()
+            y += l.height + gap * k
+        }
     }
 
     /**

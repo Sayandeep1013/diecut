@@ -202,6 +202,18 @@ fun Editor(id: Int, onDone: () -> Unit) {
                     Toggle("Monochrome icons", spec.mono) { update(spec.copy(mono = it)) }
                     Toggle("Show names", spec.labels) { update(spec.copy(labels = it)) }
                 }
+                Content.DATES -> {
+                    Toggle("Count down to every date", spec.allDates) { update(spec.copy(allDates = it)) }
+                    Text(
+                        if (spec.allDates) "Shows whichever date comes next. Turn this off to pick the dates (or the one date) this widget follows."
+                        else "Tick the dates this widget follows.",
+                        style = MaterialTheme.typography.bodySmall,
+                    )
+                    DatesManager(
+                        selected = if (spec.allDates) null else spec.dates,
+                        onToggle = { id -> update(spec.copy(dates = if (id in spec.dates) spec.dates - id else spec.dates + id)) },
+                    )
+                }
             }
 
             Section("Shape")

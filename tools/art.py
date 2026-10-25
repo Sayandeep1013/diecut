@@ -166,7 +166,123 @@ def preview_apps():
     save(img, "widget_preview_apps", w, h)
 
 
+def confetti(name, vw, vh, count, seed):
+    """An animated vector of confetti falling for ever: each piece drifts down,
+    sways and spins at its own pace, starting above the top at its own height,
+    so the fall never pauses. Shown over a dates widget on someone's day."""
+    import random
+    rnd = random.Random(seed)
+    colours = ["#E8483A", "#F2B33D", "#3DA35D", "#3B7DD8", "#B65FCF", "#F27BA3", "#FFFFFF"]
+    groups, targets = [], []
+    for i in range(count):
+        x = rnd.uniform(2, vw - 2)
+        w, h = rnd.uniform(2.2, 3.6), rnd.uniform(1.2, 1.8)
+        colour = rnd.choice(colours)
+        if rnd.random() < 0.3:
+            path = f"M-{w/2:.2f},0 a{w/2:.2f},{w/2:.2f} 0 1,0 {w:.2f},0 a{w/2:.2f},{w/2:.2f} 0 1,0 -{w:.2f},0 Z"
+        else:
+            path = f"M-{w/2:.2f},-{h/2:.2f} h{w:.2f} v{h:.2f} h-{w:.2f} Z"
+        groups.append(f"""        <group android:name="fall{i}" android:translateX="{x:.2f}" android:translateY="-10">
+            <group android:name="spin{i}">
+                <path android:fillColor="{colour}" android:pathData="{path}" />
+            </group>
+        </group>""")
+        fall = rnd.randint(2400, 4200)
+        start = -6 - rnd.uniform(0, vh)
+        spin = rnd.randint(900, 2200)
+        sway = rnd.uniform(1.5, 4)
+        targets.append(f"""    <target android:name="fall{i}">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="{start:.1f}" android:valueTo="{vh + 6}" android:duration="{fall}" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="{x - sway:.2f}" android:valueTo="{x + sway:.2f}" android:duration="{rnd.randint(700, 1400)}" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin{i}">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="{rnd.choice([360, -360])}" android:duration="{spin}" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>""")
+    xml = f"""<?xml version="1.0" encoding="utf-8"?>
+<!-- Drawn by tools/art.py: confetti for a dates widget on someone's day. -->
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+    <vector
+        android:width="{vw}dp"
+        android:height="{vh}dp"
+        android:viewportWidth="{vw}"
+        android:viewportHeight="{vh}">
+{chr(10).join(groups)}
+    </vector>
+    </aapt:attr>
+{chr(10).join(targets)}
+</animated-vector>
+"""
+    (RES / f"drawable/{name}.xml").write_text(xml, encoding="utf-8")
+
+
+def preview_dates():
+    """A blush scallop counting down: "3 days to go" (Shape.SCALLOP in Shapes.kt)."""
+    w = h = 300
+    W, H = w * SS, h * SS
+    s = min(W, H)
+    bump, radius = s * 0.055, s * 0.28
+    mask = Image.new("L", (W, H), 0)
+    md = ImageDraw.Draw(mask)
+    md.rounded_rectangle((bump, bump, W - bump, H - bump), radius=radius, fill=255)
+    # Bumps along the rounded rectangle's edge, about 1.75 bumps apart.
+    import math as m
+    x0, y0, x1, y1, r = bump, bump, W - bump, H - bump, radius
+    sw, sh = (x1 - x0) - 2 * r, (y1 - y0) - 2 * r
+    arc = m.pi * r / 2
+    total = 2 * sw + 2 * sh + 4 * arc
+
+    def at(t):
+        # Clockwise from the top edge's left end: edge, corner, edge, corner...
+        for length, kind, data in (
+            (sw, "line", ((x0 + r, y0), (1, 0))), (arc, "arc", ((x1 - r, y1 - (y1 - y0) + r), -m.pi / 2)),
+            (sh, "line", ((x1, y0 + r), (0, 1))), (arc, "arc", ((x1 - r, y1 - r), 0)),
+            (sw, "line", ((x1 - r, y1), (-1, 0))), (arc, "arc", ((x0 + r, y1 - r), m.pi / 2)),
+            (sh, "line", ((x0, y1 - r), (0, -1))), (arc, "arc", ((x0 + r, y0 + r), m.pi)),
+        ):
+            if t <= length:
+                if kind == "line":
+                    (sx, sy), (dx, dy) = data
+                    return sx + dx * t, sy + dy * t
+                (cx, cy), a0 = data
+                a = a0 + t / r
+                return cx + r * m.cos(a), cy + r * m.sin(a)
+            t -= length
+        return x0 + r, y0
+
+    n = max(8, round(total / (bump * 1.75)))
+    for i in range(n):
+        cx, cy = at(total * i / n)
+        md.ellipse((cx - bump, cy - bump, cx + bump, cy + bump), fill=255)
+    img = Image.new("RGBA", (W, H), (239, 198, 193, 255))
+    d = ImageDraw.Draw(img)
+    ink = (74, 37, 34, 255)
+    soft = (74, 37, 34, 176)
+    try:
+        big = ImageFont.truetype("C:/Windows/Fonts/segoeuil.ttf", int(H * 0.30))
+        mid = ImageFont.truetype("C:/Windows/Fonts/seguisb.ttf", int(H * 0.075))
+        small = ImageFont.truetype("C:/Windows/Fonts/segoeui.ttf", int(H * 0.058))
+    except OSError:
+        big = mid = small = ImageFont.load_default()
+    d.text((W / 2, H * 0.36), "3", font=big, fill=ink, anchor="mm")
+    d.text((W / 2, H * 0.55), "days to go", font=small, fill=soft, anchor="mm")
+    d.text((W / 2, H * 0.66), "Priya's birthday", font=mid, fill=ink, anchor="mm")
+    d.text((W / 2, H * 0.76), "Sat 5 Oct", font=small, fill=soft, anchor="mm")
+    img.putalpha(mask)
+    save(img, "widget_preview_dates", w, h)
+
+
 if __name__ == "__main__":
+    confetti("confetti", 100, 100, 34, 7)
+    confetti("confetti_wide", 300, 100, 60, 11)
+    preview_dates()
     icon()
     preview_photo()
     preview_clock()

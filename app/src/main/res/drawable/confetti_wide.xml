@@ -1,0 +1,1093 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Drawn by tools/art.py: confetti for a dates widget on someone's day. -->
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+    <vector
+        android:width="300dp"
+        android:height="100dp"
+        android:viewportWidth="300"
+        android:viewportHeight="100">
+        <group android:name="fall0" android:translateX="135.90" android:translateY="-10">
+            <group android:name="spin0">
+                <path android:fillColor="#3B7DD8" android:pathData="M-1.49,-0.88 h2.98 v1.75 h-2.98 Z" />
+            </group>
+        </group>
+        <group android:name="fall1" android:translateX="29.86" android:translateY="-10">
+            <group android:name="spin1">
+                <path android:fillColor="#FFFFFF" android:pathData="M-1.31,-0.63 h2.62 v1.25 h-2.62 Z" />
+            </group>
+        </group>
+        <group android:name="fall2" android:translateX="186.45" android:translateY="-10">
+            <group android:name="spin2">
+                <path android:fillColor="#E8483A" android:pathData="M-1.68,0 a1.68,1.68 0 1,0 3.36,0 a1.68,1.68 0 1,0 -3.36,0 Z" />
+            </group>
+        </group>
+        <group android:name="fall3" android:translateX="155.66" android:translateY="-10">
+            <group android:name="spin3">
+                <path android:fillColor="#F27BA3" android:pathData="M-1.55,0 a1.55,1.55 0 1,0 3.10,0 a1.55,1.55 0 1,0 -3.10,0 Z" />
+            </group>
+        </group>
+        <group android:name="fall4" android:translateX="95.32" android:translateY="-10">
+            <group android:name="spin4">
+                <path android:fillColor="#E8483A" android:pathData="M-1.26,-0.69 h2.52 v1.37 h-2.52 Z" />
+            </group>
+        </group>
+        <group android:name="fall5" android:translateX="65.20" android:translateY="-10">
+            <group android:name="spin5">
+                <path android:fillColor="#3B7DD8" android:pathData="M-1.75,-0.62 h3.50 v1.23 h-3.50 Z" />
+            </group>
+        </group>
+        <group android:name="fall6" android:translateX="101.72" android:translateY="-10">
+            <group android:name="spin6">
+                <path android:fillColor="#3B7DD8" android:pathData="M-1.32,-0.60 h2.64 v1.21 h-2.64 Z" />
+            </group>
+        </group>
+        <group android:name="fall7" android:translateX="54.59" android:translateY="-10">
+            <group android:name="spin7">
+                <path android:fillColor="#F2B33D" android:pathData="M-1.49,-0.73 h2.98 v1.47 h-2.98 Z" />
+            </group>
+        </group>
+        <group android:name="fall8" android:translateX="2.14" android:translateY="-10">
+            <group android:name="spin8">
+                <path android:fillColor="#B65FCF" android:pathData="M-1.71,-0.89 h3.41 v1.78 h-3.41 Z" />
+            </group>
+        </group>
+        <group android:name="fall9" android:translateX="14.46" android:translateY="-10">
+            <group android:name="spin9">
+                <path android:fillColor="#E8483A" android:pathData="M-1.20,-0.73 h2.40 v1.46 h-2.40 Z" />
+            </group>
+        </group>
+        <group android:name="fall10" android:translateX="174.49" android:translateY="-10">
+            <group android:name="spin10">
+                <path android:fillColor="#3DA35D" android:pathData="M-1.27,-0.78 h2.54 v1.56 h-2.54 Z" />
+            </group>
+        </group>
+        <group android:name="fall11" android:translateX="56.12" android:translateY="-10">
+            <group android:name="spin11">
+                <path android:fillColor="#FFFFFF" android:pathData="M-1.21,-0.87 h2.42 v1.75 h-2.42 Z" />
+            </group>
+        </group>
+        <group android:name="fall12" android:translateX="263.13" android:translateY="-10">
+            <group android:name="spin12">
+                <path android:fillColor="#E8483A" android:pathData="M-1.52,0 a1.52,1.52 0 1,0 3.04,0 a1.52,1.52 0 1,0 -3.04,0 Z" />
+            </group>
+        </group>
+        <group android:name="fall13" android:translateX="126.56" android:translateY="-10">
+            <group android:name="spin13">
+                <path android:fillColor="#B65FCF" android:pathData="M-1.73,0 a1.73,1.73 0 1,0 3.47,0 a1.73,1.73 0 1,0 -3.47,0 Z" />
+            </group>
+        </group>
+        <group android:name="fall14" android:translateX="84.94" android:translateY="-10">
+            <group android:name="spin14">
+                <path android:fillColor="#E8483A" android:pathData="M-1.74,0 a1.74,1.74 0 1,0 3.48,0 a1.74,1.74 0 1,0 -3.48,0 Z" />
+            </group>
+        </group>
+        <group android:name="fall15" android:translateX="159.18" android:translateY="-10">
+            <group android:name="spin15">
+                <path android:fillColor="#F2B33D" android:pathData="M-1.78,-0.63 h3.56 v1.26 h-3.56 Z" />
+            </group>
+        </group>
+        <group android:name="fall16" android:translateX="275.38" android:translateY="-10">
+            <group android:name="spin16">
+                <path android:fillColor="#3DA35D" android:pathData="M-1.43,-0.71 h2.86 v1.41 h-2.86 Z" />
+            </group>
+        </group>
+        <group android:name="fall17" android:translateX="42.44" android:translateY="-10">
+            <group android:name="spin17">
+                <path android:fillColor="#3DA35D" android:pathData="M-1.15,-0.74 h2.30 v1.47 h-2.30 Z" />
+            </group>
+        </group>
+        <group android:name="fall18" android:translateX="27.14" android:translateY="-10">
+            <group android:name="spin18">
+                <path android:fillColor="#FFFFFF" android:pathData="M-1.43,-0.62 h2.86 v1.25 h-2.86 Z" />
+            </group>
+        </group>
+        <group android:name="fall19" android:translateX="114.24" android:translateY="-10">
+            <group android:name="spin19">
+                <path android:fillColor="#E8483A" android:pathData="M-1.11,-0.62 h2.22 v1.24 h-2.22 Z" />
+            </group>
+        </group>
+        <group android:name="fall20" android:translateX="132.39" android:translateY="-10">
+            <group android:name="spin20">
+                <path android:fillColor="#FFFFFF" android:pathData="M-1.69,-0.63 h3.37 v1.25 h-3.37 Z" />
+            </group>
+        </group>
+        <group android:name="fall21" android:translateX="232.86" android:translateY="-10">
+            <group android:name="spin21">
+                <path android:fillColor="#E8483A" android:pathData="M-1.56,-0.75 h3.12 v1.49 h-3.12 Z" />
+            </group>
+        </group>
+        <group android:name="fall22" android:translateX="149.50" android:translateY="-10">
+            <group android:name="spin22">
+                <path android:fillColor="#3DA35D" android:pathData="M-1.27,0 a1.27,1.27 0 1,0 2.54,0 a1.27,1.27 0 1,0 -2.54,0 Z" />
+            </group>
+        </group>
+        <group android:name="fall23" android:translateX="174.60" android:translateY="-10">
+            <group android:name="spin23">
+                <path android:fillColor="#3B7DD8" android:pathData="M-1.32,-0.64 h2.64 v1.28 h-2.64 Z" />
+            </group>
+        </group>
+        <group android:name="fall24" android:translateX="35.40" android:translateY="-10">
+            <group android:name="spin24">
+                <path android:fillColor="#FFFFFF" android:pathData="M-1.43,-0.88 h2.86 v1.76 h-2.86 Z" />
+            </group>
+        </group>
+        <group android:name="fall25" android:translateX="96.82" android:translateY="-10">
+            <group android:name="spin25">
+                <path android:fillColor="#B65FCF" android:pathData="M-1.68,0 a1.68,1.68 0 1,0 3.36,0 a1.68,1.68 0 1,0 -3.36,0 Z" />
+            </group>
+        </group>
+        <group android:name="fall26" android:translateX="191.73" android:translateY="-10">
+            <group android:name="spin26">
+                <path android:fillColor="#FFFFFF" android:pathData="M-1.38,-0.66 h2.77 v1.31 h-2.77 Z" />
+            </group>
+        </group>
+        <group android:name="fall27" android:translateX="34.27" android:translateY="-10">
+            <group android:name="spin27">
+                <path android:fillColor="#3DA35D" android:pathData="M-1.47,-0.79 h2.95 v1.58 h-2.95 Z" />
+            </group>
+        </group>
+        <group android:name="fall28" android:translateX="160.32" android:translateY="-10">
+            <group android:name="spin28">
+                <path android:fillColor="#FFFFFF" android:pathData="M-1.13,-0.67 h2.25 v1.34 h-2.25 Z" />
+            </group>
+        </group>
+        <group android:name="fall29" android:translateX="253.23" android:translateY="-10">
+            <group android:name="spin29">
+                <path android:fillColor="#3B7DD8" android:pathData="M-1.59,-0.67 h3.18 v1.33 h-3.18 Z" />
+            </group>
+        </group>
+        <group android:name="fall30" android:translateX="113.53" android:translateY="-10">
+            <group android:name="spin30">
+                <path android:fillColor="#FFFFFF" android:pathData="M-1.50,-0.86 h3.00 v1.73 h-3.00 Z" />
+            </group>
+        </group>
+        <group android:name="fall31" android:translateX="65.14" android:translateY="-10">
+            <group android:name="spin31">
+                <path android:fillColor="#3DA35D" android:pathData="M-1.73,-0.89 h3.46 v1.79 h-3.46 Z" />
+            </group>
+        </group>
+        <group android:name="fall32" android:translateX="151.40" android:translateY="-10">
+            <group android:name="spin32">
+                <path android:fillColor="#3B7DD8" android:pathData="M-1.13,-0.70 h2.25 v1.41 h-2.25 Z" />
+            </group>
+        </group>
+        <group android:name="fall33" android:translateX="238.76" android:translateY="-10">
+            <group android:name="spin33">
+                <path android:fillColor="#FFFFFF" android:pathData="M-1.22,-0.70 h2.44 v1.40 h-2.44 Z" />
+            </group>
+        </group>
+        <group android:name="fall34" android:translateX="281.94" android:translateY="-10">
+            <group android:name="spin34">
+                <path android:fillColor="#E8483A" android:pathData="M-1.44,-0.88 h2.89 v1.77 h-2.89 Z" />
+            </group>
+        </group>
+        <group android:name="fall35" android:translateX="156.74" android:translateY="-10">
+            <group android:name="spin35">
+                <path android:fillColor="#3DA35D" android:pathData="M-1.69,-0.77 h3.38 v1.54 h-3.38 Z" />
+            </group>
+        </group>
+        <group android:name="fall36" android:translateX="171.60" android:translateY="-10">
+            <group android:name="spin36">
+                <path android:fillColor="#B65FCF" android:pathData="M-1.24,0 a1.24,1.24 0 1,0 2.48,0 a1.24,1.24 0 1,0 -2.48,0 Z" />
+            </group>
+        </group>
+        <group android:name="fall37" android:translateX="147.35" android:translateY="-10">
+            <group android:name="spin37">
+                <path android:fillColor="#B65FCF" android:pathData="M-1.58,-0.62 h3.17 v1.24 h-3.17 Z" />
+            </group>
+        </group>
+        <group android:name="fall38" android:translateX="102.55" android:translateY="-10">
+            <group android:name="spin38">
+                <path android:fillColor="#3B7DD8" android:pathData="M-1.73,-0.88 h3.46 v1.76 h-3.46 Z" />
+            </group>
+        </group>
+        <group android:name="fall39" android:translateX="209.82" android:translateY="-10">
+            <group android:name="spin39">
+                <path android:fillColor="#F2B33D" android:pathData="M-1.78,0 a1.78,1.78 0 1,0 3.57,0 a1.78,1.78 0 1,0 -3.57,0 Z" />
+            </group>
+        </group>
+        <group android:name="fall40" android:translateX="149.90" android:translateY="-10">
+            <group android:name="spin40">
+                <path android:fillColor="#B65FCF" android:pathData="M-1.51,0 a1.51,1.51 0 1,0 3.02,0 a1.51,1.51 0 1,0 -3.02,0 Z" />
+            </group>
+        </group>
+        <group android:name="fall41" android:translateX="246.25" android:translateY="-10">
+            <group android:name="spin41">
+                <path android:fillColor="#FFFFFF" android:pathData="M-1.53,-0.76 h3.06 v1.52 h-3.06 Z" />
+            </group>
+        </group>
+        <group android:name="fall42" android:translateX="70.87" android:translateY="-10">
+            <group android:name="spin42">
+                <path android:fillColor="#F2B33D" android:pathData="M-1.62,-0.84 h3.24 v1.69 h-3.24 Z" />
+            </group>
+        </group>
+        <group android:name="fall43" android:translateX="41.64" android:translateY="-10">
+            <group android:name="spin43">
+                <path android:fillColor="#3DA35D" android:pathData="M-1.27,-0.82 h2.54 v1.64 h-2.54 Z" />
+            </group>
+        </group>
+        <group android:name="fall44" android:translateX="121.22" android:translateY="-10">
+            <group android:name="spin44">
+                <path android:fillColor="#F2B33D" android:pathData="M-1.58,-0.61 h3.16 v1.21 h-3.16 Z" />
+            </group>
+        </group>
+        <group android:name="fall45" android:translateX="150.82" android:translateY="-10">
+            <group android:name="spin45">
+                <path android:fillColor="#E8483A" android:pathData="M-1.58,-0.66 h3.16 v1.31 h-3.16 Z" />
+            </group>
+        </group>
+        <group android:name="fall46" android:translateX="45.38" android:translateY="-10">
+            <group android:name="spin46">
+                <path android:fillColor="#FFFFFF" android:pathData="M-1.23,0 a1.23,1.23 0 1,0 2.46,0 a1.23,1.23 0 1,0 -2.46,0 Z" />
+            </group>
+        </group>
+        <group android:name="fall47" android:translateX="24.97" android:translateY="-10">
+            <group android:name="spin47">
+                <path android:fillColor="#3B7DD8" android:pathData="M-1.17,-0.72 h2.34 v1.43 h-2.34 Z" />
+            </group>
+        </group>
+        <group android:name="fall48" android:translateX="55.66" android:translateY="-10">
+            <group android:name="spin48">
+                <path android:fillColor="#3B7DD8" android:pathData="M-1.42,-0.82 h2.84 v1.64 h-2.84 Z" />
+            </group>
+        </group>
+        <group android:name="fall49" android:translateX="239.31" android:translateY="-10">
+            <group android:name="spin49">
+                <path android:fillColor="#F27BA3" android:pathData="M-1.59,-0.86 h3.19 v1.72 h-3.19 Z" />
+            </group>
+        </group>
+        <group android:name="fall50" android:translateX="84.74" android:translateY="-10">
+            <group android:name="spin50">
+                <path android:fillColor="#F2B33D" android:pathData="M-1.18,-0.82 h2.36 v1.65 h-2.36 Z" />
+            </group>
+        </group>
+        <group android:name="fall51" android:translateX="228.51" android:translateY="-10">
+            <group android:name="spin51">
+                <path android:fillColor="#E8483A" android:pathData="M-1.38,-0.82 h2.77 v1.63 h-2.77 Z" />
+            </group>
+        </group>
+        <group android:name="fall52" android:translateX="70.70" android:translateY="-10">
+            <group android:name="spin52">
+                <path android:fillColor="#3DA35D" android:pathData="M-1.76,0 a1.76,1.76 0 1,0 3.52,0 a1.76,1.76 0 1,0 -3.52,0 Z" />
+            </group>
+        </group>
+        <group android:name="fall53" android:translateX="192.11" android:translateY="-10">
+            <group android:name="spin53">
+                <path android:fillColor="#B65FCF" android:pathData="M-1.59,0 a1.59,1.59 0 1,0 3.18,0 a1.59,1.59 0 1,0 -3.18,0 Z" />
+            </group>
+        </group>
+        <group android:name="fall54" android:translateX="227.35" android:translateY="-10">
+            <group android:name="spin54">
+                <path android:fillColor="#3DA35D" android:pathData="M-1.55,0 a1.55,1.55 0 1,0 3.11,0 a1.55,1.55 0 1,0 -3.11,0 Z" />
+            </group>
+        </group>
+        <group android:name="fall55" android:translateX="190.85" android:translateY="-10">
+            <group android:name="spin55">
+                <path android:fillColor="#B65FCF" android:pathData="M-1.67,-0.62 h3.33 v1.25 h-3.33 Z" />
+            </group>
+        </group>
+        <group android:name="fall56" android:translateX="162.42" android:translateY="-10">
+            <group android:name="spin56">
+                <path android:fillColor="#3B7DD8" android:pathData="M-1.52,-0.73 h3.04 v1.46 h-3.04 Z" />
+            </group>
+        </group>
+        <group android:name="fall57" android:translateX="195.91" android:translateY="-10">
+            <group android:name="spin57">
+                <path android:fillColor="#F27BA3" android:pathData="M-1.49,-0.69 h2.98 v1.37 h-2.98 Z" />
+            </group>
+        </group>
+        <group android:name="fall58" android:translateX="123.01" android:translateY="-10">
+            <group android:name="spin58">
+                <path android:fillColor="#3DA35D" android:pathData="M-1.58,-0.62 h3.16 v1.23 h-3.16 Z" />
+            </group>
+        </group>
+        <group android:name="fall59" android:translateX="214.86" android:translateY="-10">
+            <group android:name="spin59">
+                <path android:fillColor="#E8483A" android:pathData="M-1.28,-0.83 h2.55 v1.65 h-2.55 Z" />
+            </group>
+        </group>
+    </vector>
+    </aapt:attr>
+    <target android:name="fall0">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-64.7" android:valueTo="106" android:duration="4151" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="132.39" android:valueTo="139.41" android:duration="1187" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin0">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1278" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall1">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-10.2" android:valueTo="106" android:duration="3699" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="25.95" android:valueTo="33.77" android:duration="1369" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin1">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1711" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall2">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-66.0" android:valueTo="106" android:duration="2895" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="184.13" android:valueTo="188.76" android:duration="1305" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin2">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1850" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall3">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-33.8" android:valueTo="106" android:duration="3741" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="151.67" android:valueTo="159.65" android:duration="785" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin3">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="2028" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall4">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-46.0" android:valueTo="106" android:duration="2621" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="92.86" android:valueTo="97.79" android:duration="717" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin4">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1495" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall5">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-48.0" android:valueTo="106" android:duration="3213" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="62.12" android:valueTo="68.27" android:duration="1391" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin5">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="2059" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall6">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-19.5" android:valueTo="106" android:duration="2641" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="100.19" android:valueTo="103.25" android:duration="1176" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin6">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1106" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall7">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-19.1" android:valueTo="106" android:duration="3975" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="52.80" android:valueTo="56.38" android:duration="1130" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin7">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1685" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall8">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-27.1" android:valueTo="106" android:duration="2440" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="-1.85" android:valueTo="6.13" android:duration="1316" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin8">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1707" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall9">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-89.0" android:valueTo="106" android:duration="3073" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="12.78" android:valueTo="16.15" android:duration="792" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin9">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1690" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall10">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-101.9" android:valueTo="106" android:duration="2660" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="170.91" android:valueTo="178.07" android:duration="838" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin10">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1890" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall11">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-25.0" android:valueTo="106" android:duration="3885" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="52.27" android:valueTo="59.97" android:duration="901" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin11">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="2188" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall12">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-102.3" android:valueTo="106" android:duration="3449" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="259.78" android:valueTo="266.48" android:duration="1101" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin12">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1388" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall13">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-103.7" android:valueTo="106" android:duration="3875" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="124.49" android:valueTo="128.63" android:duration="1272" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin13">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1158" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall14">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-50.6" android:valueTo="106" android:duration="3242" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="83.33" android:valueTo="86.56" android:duration="988" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin14">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1023" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall15">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-71.7" android:valueTo="106" android:duration="3077" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="156.22" android:valueTo="162.14" android:duration="843" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin15">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1968" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall16">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-65.8" android:valueTo="106" android:duration="2443" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="272.68" android:valueTo="278.09" android:duration="1018" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin16">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1053" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall17">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-79.7" android:valueTo="106" android:duration="3909" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="38.95" android:valueTo="45.92" android:duration="1049" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin17">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1165" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall18">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-9.0" android:valueTo="106" android:duration="4019" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="24.21" android:valueTo="30.07" android:duration="1339" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin18">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1923" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall19">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-94.0" android:valueTo="106" android:duration="2926" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="111.77" android:valueTo="116.71" android:duration="1294" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin19">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1576" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall20">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-66.1" android:valueTo="106" android:duration="3035" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="130.84" android:valueTo="133.95" android:duration="815" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin20">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1884" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall21">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-73.8" android:valueTo="106" android:duration="2693" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="230.07" android:valueTo="235.66" android:duration="1050" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin21">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1314" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall22">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-86.4" android:valueTo="106" android:duration="3282" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="145.80" android:valueTo="153.20" android:duration="1093" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin22">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1310" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall23">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-10.1" android:valueTo="106" android:duration="4138" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="170.72" android:valueTo="178.47" android:duration="983" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin23">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1031" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall24">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-58.0" android:valueTo="106" android:duration="3681" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="32.11" android:valueTo="38.69" android:duration="1339" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin24">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1545" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall25">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-34.1" android:valueTo="106" android:duration="3851" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="94.55" android:valueTo="99.10" android:duration="1277" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin25">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1625" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall26">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-83.9" android:valueTo="106" android:duration="2886" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="187.77" android:valueTo="195.69" android:duration="818" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin26">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="996" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall27">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-25.8" android:valueTo="106" android:duration="3801" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="32.13" android:valueTo="36.41" android:duration="711" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin27">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1873" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall28">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-100.7" android:valueTo="106" android:duration="3828" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="157.28" android:valueTo="163.35" android:duration="863" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin28">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1924" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall29">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-44.8" android:valueTo="106" android:duration="3879" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="250.60" android:valueTo="255.87" android:duration="1340" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin29">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1822" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall30">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-52.4" android:valueTo="106" android:duration="3102" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="111.79" android:valueTo="115.28" android:duration="1357" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin30">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1319" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall31">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-99.2" android:valueTo="106" android:duration="4019" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="61.36" android:valueTo="68.91" android:duration="716" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin31">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1436" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall32">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-98.0" android:valueTo="106" android:duration="3398" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="147.87" android:valueTo="154.92" android:duration="765" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin32">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1347" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall33">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-20.9" android:valueTo="106" android:duration="3363" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="235.01" android:valueTo="242.51" android:duration="1230" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin33">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1957" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall34">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-58.7" android:valueTo="106" android:duration="3299" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="278.36" android:valueTo="285.52" android:duration="1275" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin34">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1494" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall35">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-93.0" android:valueTo="106" android:duration="4131" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="154.72" android:valueTo="158.76" android:duration="844" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin35">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="2148" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall36">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-8.8" android:valueTo="106" android:duration="3172" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="168.81" android:valueTo="174.39" android:duration="1110" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin36">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="990" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall37">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-98.3" android:valueTo="106" android:duration="4039" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="145.23" android:valueTo="149.46" android:duration="1204" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin37">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1451" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall38">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-25.1" android:valueTo="106" android:duration="2622" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="100.97" android:valueTo="104.12" android:duration="966" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin38">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="2165" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall39">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-34.4" android:valueTo="106" android:duration="3807" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="207.71" android:valueTo="211.93" android:duration="1210" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin39">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1627" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall40">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-76.1" android:valueTo="106" android:duration="2804" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="148.35" android:valueTo="151.46" android:duration="1348" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin40">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1794" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall41">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-27.8" android:valueTo="106" android:duration="3707" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="242.63" android:valueTo="249.88" android:duration="1326" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin41">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1342" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall42">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-95.1" android:valueTo="106" android:duration="3045" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="68.82" android:valueTo="72.91" android:duration="899" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin42">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1298" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall43">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-89.2" android:valueTo="106" android:duration="3290" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="38.79" android:valueTo="44.50" android:duration="829" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin43">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1763" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall44">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-97.1" android:valueTo="106" android:duration="3132" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="119.43" android:valueTo="123.01" android:duration="1217" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin44">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1639" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall45">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-9.7" android:valueTo="106" android:duration="2449" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="147.79" android:valueTo="153.86" android:duration="1282" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin45">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="2029" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall46">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-98.7" android:valueTo="106" android:duration="2979" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="42.43" android:valueTo="48.33" android:duration="837" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin46">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1095" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall47">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-27.0" android:valueTo="106" android:duration="3280" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="23.44" android:valueTo="26.50" android:duration="741" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin47">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1664" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall48">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-22.5" android:valueTo="106" android:duration="3638" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="52.17" android:valueTo="59.14" android:duration="1031" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin48">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1949" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall49">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-66.0" android:valueTo="106" android:duration="3566" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="236.34" android:valueTo="242.27" android:duration="1049" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin49">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1932" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall50">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-19.3" android:valueTo="106" android:duration="3230" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="81.04" android:valueTo="88.44" android:duration="1078" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin50">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1575" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall51">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-52.9" android:valueTo="106" android:duration="3017" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="224.79" android:valueTo="232.23" android:duration="1354" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin51">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="921" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall52">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-63.0" android:valueTo="106" android:duration="3231" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="69.01" android:valueTo="72.40" android:duration="1227" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin52">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1991" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall53">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-16.8" android:valueTo="106" android:duration="3660" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="189.97" android:valueTo="194.25" android:duration="1111" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin53">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1385" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall54">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-61.0" android:valueTo="106" android:duration="3098" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="224.81" android:valueTo="229.89" android:duration="1233" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin54">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1940" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall55">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-44.6" android:valueTo="106" android:duration="2492" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="188.39" android:valueTo="193.32" android:duration="873" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin55">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1227" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall56">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-45.9" android:valueTo="106" android:duration="3478" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="160.00" android:valueTo="164.83" android:duration="992" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin56">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1539" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall57">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-7.4" android:valueTo="106" android:duration="2455" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="192.95" android:valueTo="198.88" android:duration="1348" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin57">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1401" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall58">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-64.2" android:valueTo="106" android:duration="2502" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="121.32" android:valueTo="124.69" android:duration="929" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin58">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="-360" android:duration="1553" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+    <target android:name="fall59">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator android:propertyName="translateY" android:valueFrom="-78.3" android:valueTo="106" android:duration="4059" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+                <objectAnimator android:propertyName="translateX" android:valueFrom="213.00" android:valueTo="216.72" android:duration="951" android:repeatCount="infinite" android:repeatMode="reverse" android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="spin59">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation" android:valueFrom="0" android:valueTo="360" android:duration="1859" android:repeatCount="infinite" android:interpolator="@android:anim/linear_interpolator" android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+</animated-vector>
