@@ -56,6 +56,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        DayAlarms.schedule(this)
         setContent { DiecutTheme { Home(tick) } }
     }
 
@@ -75,6 +76,7 @@ private val kinds = listOf(
     Kind(Content.PHOTO, PhotoWidget::class.java, "A picture, or a few that take turns"),
     Kind(Content.CLOCK, ClockWidget::class.java, "Digital or analogue, always on time"),
     Kind(Content.APPS, AppsWidget::class.java, "Up to eight apps, each a tap away"),
+    Kind(Content.DATES, DatesWidget::class.java, "Days to go to birthdays and special dates"),
 )
 
 private fun pin(ctx: Context, kind: Kind) {
@@ -113,6 +115,14 @@ private fun Home(tick: Int) {
             }
             if (!canPin) item {
                 Text("Your launcher adds widgets itself: long-press the home screen, open Widgets and find Diecut.")
+            }
+            item {
+                ElevatedCard(onClick = { ctx.startActivity(Intent(ctx, DatesActivity::class.java)) }, modifier = Modifier.fillMaxWidth()) {
+                    Column(Modifier.padding(16.dp)) {
+                        Text("Your dates", style = MaterialTheme.typography.titleMedium)
+                        Text("Birthdays, anniversaries and special days, with a message for each", style = MaterialTheme.typography.bodyMedium)
+                    }
+                }
             }
             item { Heading("On your home screen") }
             if (ids.isEmpty()) item { Text("None yet.", style = MaterialTheme.typography.bodyMedium) }

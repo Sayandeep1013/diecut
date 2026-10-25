@@ -39,6 +39,9 @@ abstract class DiecutWidget : AppWidgetProvider() {
 class PhotoWidget : DiecutWidget()
 class ClockWidget : DiecutWidget()
 class AppsWidget : DiecutWidget()
+class DatesWidget : DiecutWidget() {
+    override fun onEnabled(ctx: Context) = DayAlarms.schedule(ctx)
+}
 
 /** Taps that change a widget without opening anything (the next photo), and pin callbacks. */
 class TapReceiver : BroadcastReceiver() {
@@ -61,7 +64,7 @@ class TapReceiver : BroadcastReceiver() {
 }
 
 object WidgetDraw {
-    val providers = listOf(PhotoWidget::class.java, ClockWidget::class.java, AppsWidget::class.java)
+    val providers = listOf(PhotoWidget::class.java, ClockWidget::class.java, AppsWidget::class.java, DatesWidget::class.java)
 
     private val taps = intArrayOf(R.id.tap0, R.id.tap1, R.id.tap2, R.id.tap3, R.id.tap4, R.id.tap5, R.id.tap6, R.id.tap7)
 
@@ -87,6 +90,7 @@ object WidgetDraw {
         val opts = AppWidgetManager.getInstance(ctx).getAppWidgetOptions(id)
         val (dw, dh) = when (content) {
             Content.APPS -> 300 to 90
+            Content.DATES -> 150 to 150
             else -> 150 to 150
         }
         val w = opts.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH).takeIf { it > 0 } ?: dw
@@ -99,10 +103,15 @@ object WidgetDraw {
         val (w, h) = size(ctx, id, spec.content)
         val u = Renderer.scale(ctx, w, h)
         val views = RemoteViews(ctx.packageName, R.layout.widget)
+        var party = false
         try {
             val face = Renderer.render(ctx, spec, w, h, u, preview = false)
             views.setImageViewBitmap(R.id.face, face.bitmap)
             clock(views, spec, face, Palettes.resolve(ctx, spec.palette))
+            // Confetti falls on someone's day: an animated drawable the launcher keeps playing.
+            views.setViewVisibility(R.id.confetti, if (face.party && w < h * 1.8f) View.VISIBLE else View.GONE)
+            views.setViewVisibility(R.id.confetti_wide, if (face.party && w >= h * 1.8f) View.VISIBLE else View.GONE)
+            party = face.party
             for ((i, view) in taps.withIndex()) {
                 val tap = face.taps.getOrNull(i)
                 if (tap == null) {
@@ -115,7 +124,7 @@ object WidgetDraw {
         } catch (e: Exception) {
             // A face that cannot be drawn stays as it was.
         }
-        views.setOnClickPendingIntent(R.id.face, faceTap(ctx, id, spec))
+        views.setOnClickPendingIntent(R.id.face, if (party) celebrate(ctx, id) else faceTap(ctx, id, spec))
         mgr.updateAppWidget(id, views)
     }
 
@@ -171,6 +180,12 @@ object WidgetDraw {
         )
         else -> editor(ctx, id)
     }
+
+    private fun celebrate(ctx: Context, id: Int): PendingIntent = PendingIntent.getActivity(
+        ctx, id * 16 + 11,
+        Intent(ctx, CelebrateActivity::class.java).putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, id).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+        PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
+    )
 
     fun editor(ctx: Context, id: Int): PendingIntent = PendingIntent.getActivity(
         ctx, id * 16 + 10, editorIntent(ctx, id),

@@ -2,12 +2,13 @@ package app.diecut
 
 import android.appwidget.AppWidgetManager
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Color
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
 
-enum class Content(val label: String) { PHOTO("Photo"), CLOCK("Clock"), APPS("Apps") }
+enum class Content(val label: String) { PHOTO("Photo"), CLOCK("Clock"), APPS("Apps"), DATES("Dates") }
 
 /** How a clock shows the time. The digital ones are system fonts, which a widget's TextClock can use. */
 enum class ClockStyle(val label: String, val family: String?) {
@@ -38,6 +39,9 @@ data class Spec(
     val fit: Boolean = true,
     /** App icons in one colour. */
     val mono: Boolean = false,
+    /** Follow every date in the book, or only [dates] (their ids). */
+    val allDates: Boolean = true,
+    val dates: List<String> = emptyList(),
 ) {
     fun currentPhoto(): String? = if (photos.isEmpty()) null else photos[photoIndex.mod(photos.size)]
 
@@ -55,6 +59,8 @@ data class Spec(
         put("labels", labels)
         put("fit", fit)
         put("mono", mono)
+        put("allDates", allDates)
+        put("dates", JSONArray(dates))
     }.toString()
 
     companion object {
@@ -75,6 +81,8 @@ data class Spec(
                 labels = o.optBoolean("labels"),
                 fit = o.optBoolean("fit", true),
                 mono = o.optBoolean("mono"),
+                allDates = o.optBoolean("allDates", true),
+                dates = list("dates"),
             )
         } catch (e: Exception) {
             null
@@ -84,6 +92,7 @@ data class Spec(
             Content.PHOTO -> Spec(content, Shape.STAMP, "paper")
             Content.CLOCK -> Spec(content, Shape.CIRCLE, "ink")
             Content.APPS -> Spec(content, Shape.TICKET, "cream")
+            Content.DATES -> Spec(content, Shape.SCALLOP, "blush")
         }
     }
 }
@@ -102,6 +111,7 @@ object Store {
         return when (cls) {
             ClockWidget::class.java.name -> Content.CLOCK
             AppsWidget::class.java.name -> Content.APPS
+            DatesWidget::class.java.name -> Content.DATES
             else -> Content.PHOTO
         }
     }
@@ -146,6 +156,8 @@ object Store {
      */
     fun noteSize(ctx: Context, id: Int, w: Int, h: Int) {
         if (w <= 0 || h <= 0) return
+        // Some launchers (Nothing's) report other sizes while the phone is on its side; that is not a resize.
+        if (ctx.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) return
         val p = prefs(ctx)
         val now = System.currentTimeMillis()
         val old = p.getString("size_$id", null)
@@ -154,7 +166,7 @@ object Store {
         if (placed == 0L) e.putLong("placed_$id", now)
         e.apply()
         // Launchers settle a new widget's size in its first moments; later changes are the person's.
-        if (old != null && old != "${w}x$h" && placed != 0L && now - placed > 15_000) {
+        if (old != null && Timing.resized(old, w, h) && placed != 0L && now - placed > 15_000) {
             val s = spec(ctx, id)
             if (s.fit) put(ctx, id, s.copy(fit = false))
         }

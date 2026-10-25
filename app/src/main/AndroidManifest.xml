@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Android 11+ package visibility: lets the apps widget list launchable apps. -->
+    <!-- Birthdays and anniversaries from the contacts; the morning reminder; alarms that survive a restart. -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <queries>
         <intent>
             <action android:name="android.intent.action.MAIN" />
@@ -73,7 +78,41 @@
         </receiver>
 
         <receiver
+            android:name=".DatesWidget"
+            android:exported="false"
+            android:label="Diecut dates">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_dates_info" />
+        </receiver>
+
+        <receiver
             android:name=".TapReceiver"
             android:exported="false" />
+
+        <receiver
+            android:name=".DayReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".DatesActivity"
+            android:exported="false"
+            android:label="Dates" />
+
+        <activity
+            android:name=".CelebrateActivity"
+            android:exported="false"
+            android:label="Celebrate"
+            android:taskAffinity="app.diecut.celebrate"
+            android:excludeFromRecents="true" />
     </application>
 </manifest>

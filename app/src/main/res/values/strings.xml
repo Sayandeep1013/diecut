@@ -5,4 +5,5 @@
     <string name="widget_photo">A photo, cut to a shape</string>
     <string name="widget_clock">A clock, cut to a shape</string>
     <string name="widget_apps">Your apps, cut to a shape</string>
+    <string name="widget_dates">Days to go to a birthday or any date</string>
 </resources>
