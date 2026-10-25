@@ -69,7 +69,8 @@ Things learned there:
    stamp, film, polaroid, frame, circle, squircle, ticket, scallop, arch.
 4. **Editor**: the configuration activity, with a live preview from the same renderer.
 5. **Price**: not decided; shapes live in one enum so some can be locked later.
-6. **Repo**: github.com/Sayandeep1013/diecut (private for now). The release key is
+6. **Repo**: github.com/Sayandeep1013/diecut (public). Releases are `v*` tags; CI
+   attaches the APK. The release key is
    kept outside the repo in `~/.diecut/` and in the repo's secrets.
 
 Also learned here: analogue hands work as `AnalogClock` icons (`setDial`,

@@ -54,10 +54,11 @@ your wallpaper (Material You).
 
 ## Install
 
-Diecut needs Android 12 or later. Download the APK from the
-[latest build](../../actions/workflows/build.yml) (the `diecut-apk` artifact) or from
-[Releases](../../releases), and open it on your phone. Each build installs over the
-last one without losing your widgets.
+Diecut needs Android 12 or later. Download `diecut-v….apk` from the
+[latest release](../../releases/latest) and open it on your phone (allow your browser
+or file manager to install apps when asked). Each release installs over the last one
+without losing your widgets. Builds of work in progress are on the
+[Actions](../../actions/workflows/build.yml) page, as the `diecut-apk` artifact.
 
 ## How it works
 
