@@ -16,11 +16,20 @@ import kotlin.math.sqrt
  * One shape cut at a size, in dp. [outline] is the paper, holes and all; the
  * content goes in [window] ([windowRect] its bounds); icons and clocks keep
  * inside [safe]. [band] is an optional frame drawn in the ink colour.
+ * [frames] splits the window into cells (film), one thing in each.
  */
-class Cut(val outline: Path, val window: Path, val windowRect: RectF, val safe: RectF, val band: Path? = null)
+class Cut(
+    val outline: Path,
+    val window: Path,
+    val windowRect: RectF,
+    val safe: RectF,
+    val band: Path? = null,
+    val frames: List<RectF>? = null,
+)
 
 enum class Shape(val label: String) {
     STAMP("Stamp"),
+    FILM("Film"),
     POLAROID("Polaroid"),
     FRAME("Frame"),
     CIRCLE("Circle"),
@@ -29,9 +38,11 @@ enum class Shape(val label: String) {
     SCALLOP("Scallop"),
     ARCH("Arch");
 
-    fun cut(w: Float, h: Float): Cut {
+    /** The shape at [w] x [h] dp; [cells] is how many frames a film has. */
+    fun cut(w: Float, h: Float, cells: Int = 1): Cut {
         val s = min(w, h)
         return when (this) {
+            FILM -> film(w, h, cells)
             STAMP -> {
                 // Holes about 3.6 radii apart, so each tooth is about a hole wide,
                 // spread evenly along each edge with one on every corner.
@@ -128,6 +139,53 @@ enum class Shape(val label: String) {
     }
 
     companion object {
+        /**
+         * A strip of film: a row of sprocket holes along each edge, cut
+         * through, and [count] frames between them. It runs along the
+         * widget's long side.
+         */
+        fun film(w: Float, h: Float, count: Int): Cut {
+            val across = w >= h
+            val len = if (across) w else h
+            val thick = if (across) h else w
+            val band = filmBand(thick)
+            val gap = filmGap(thick)
+            fun along(a0: Float, a1: Float, c0: Float, c1: Float) = if (across) RectF(a0, c0, a1, c1) else RectF(c0, a0, c1, a1)
+            val body = round(RectF(0f, 0f, w, h), 1.5f)
+            val holes = Path()
+            val holeLong = band * 0.46f
+            val holeShort = band * 0.42f
+            val n = Grid.steps(len, band * 0.95f, 2)
+            for (i in 0 until n) {
+                val a = len * (i + 0.5f) / n
+                for (c in floatArrayOf(band / 2, thick - band / 2)) {
+                    holes.addRoundRect(along(a - holeLong / 2, a + holeLong / 2, c - holeShort / 2, c + holeShort / 2), holeShort * 0.28f, holeShort * 0.28f, Path.Direction.CW)
+                }
+            }
+            body.op(holes, Path.Op.DIFFERENCE)
+            val k = max(1, count)
+            val frameLen = (len - gap * (k + 1)) / k
+            val frames = List(k) { i ->
+                val a0 = gap + i * (frameLen + gap)
+                along(a0, a0 + frameLen, band, thick - band)
+            }
+            val window = Path().apply { for (f in frames) addRoundRect(f, 2f, 2f, Path.Direction.CW) }
+            val all = along(gap, len - gap, band, thick - band)
+            return Cut(body, window, all, all, frames = frames)
+        }
+
+        fun filmBand(thick: Float) = thick * 0.17f
+
+        fun filmGap(thick: Float) = filmBand(thick) * 0.3f
+
+        /** How long a film [thick] dp across is with [count] frames of [aspect] (length over height). */
+        fun filmLength(thick: Float, count: Int, aspect: Float): Float =
+            count * (thick - 2 * filmBand(thick)) * aspect + (count + 1) * filmGap(thick)
+
+        /** How many frames of [aspect] fill a film [len] x [thick] dp. */
+        fun filmFits(len: Float, thick: Float, aspect: Float): Int =
+            max(1, Math.round((len - filmGap(thick)) / ((thick - 2 * filmBand(thick)) * aspect + filmGap(thick))))
+
         fun rect(l: Float, t: Float, r: Float, b: Float) = Path().apply { addRect(l, t, r, b, Path.Direction.CW) }
 
         fun rect(r: RectF) = Path().apply { addRect(r, Path.Direction.CW) }

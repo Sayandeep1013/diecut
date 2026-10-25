@@ -186,9 +186,15 @@ fun Editor(id: Int, onDone: () -> Unit) {
                     }
                 }
                 Content.APPS -> {
-                    OutlinedButton(onClick = { choosingApps = true }) {
-                        Text(if (spec.apps.isEmpty()) "Choose apps" else "Change apps (${spec.apps.size})")
+                    if (spec.apps.isNotEmpty()) {
+                        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                            for (a in spec.apps) AppIcon(ctx, a)
+                        }
                     }
+                    OutlinedButton(onClick = { choosingApps = true }) {
+                        Text(if (spec.apps.isEmpty()) "Choose apps (up to 8)" else "Change apps (${spec.apps.size} of 8)")
+                    }
+                    Toggle("Fit the shape to the apps", spec.fit) { update(spec.copy(fit = it)) }
                     Toggle("Show names", spec.labels) { update(spec.copy(labels = it)) }
                 }
             }
@@ -320,7 +326,10 @@ private fun AppPicker(initial: List<String>, onDismiss: () -> Unit, onDone: (Lis
                 OutlinedTextField(query, { query = it }, singleLine = true, placeholder = { Text("Search") }, modifier = Modifier.fillMaxWidth())
                 Spacer(Modifier.height(8.dp))
                 LazyColumn(Modifier.heightIn(max = 420.dp)) {
-                    items(all.filter { it.label.contains(query, ignoreCase = true) }, key = { it.component }) { app ->
+                    // The ones chosen first, in their order, then the rest.
+                    val shown = all.sortedBy { initial.indexOf(it.component).let { i -> if (i < 0) Int.MAX_VALUE else i } }
+                        .filter { it.label.contains(query, ignoreCase = true) }
+                    items(shown, key = { it.component }) { app ->
                         val on = app.component in chosen
                         Row(
                             Modifier.fillMaxWidth().clickable {

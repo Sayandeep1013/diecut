@@ -3,9 +3,11 @@ package app.diecut
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
+import android.provider.MediaStore
 import java.io.File
 import java.util.UUID
 import kotlin.math.max
@@ -43,6 +45,25 @@ object Apps {
             .map { AppEntry(ComponentName(it.activityInfo.packageName, it.activityInfo.name).flattenToString(), it.loadLabel(pm).toString()) }
             .distinctBy { it.component }
             .sortedBy { it.label.lowercase() }
+    }
+
+    /**
+     * Four apps a new apps widget starts with, so it looks like its preview
+     * at once: the phone, messages, browser and camera apps, then any others.
+     */
+    fun suggested(ctx: Context): List<String> {
+        val pm = ctx.packageManager
+        val wants = listOf(
+            Intent(Intent.ACTION_DIAL),
+            Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:")),
+            Intent(Intent.ACTION_VIEW, Uri.parse("https://example.com")),
+            Intent(MediaStore.ACTION_IMAGE_CAPTURE),
+        )
+        val picked = wants.mapNotNull { want ->
+            val pkg = pm.resolveActivity(want, PackageManager.MATCH_DEFAULT_ONLY)?.activityInfo?.packageName ?: return@mapNotNull null
+            pm.getLaunchIntentForPackage(pkg)?.component?.flattenToString()
+        }.distinct()
+        return (picked + launchable(ctx).map { it.component }).distinct().take(4)
     }
 
     fun icon(ctx: Context, component: String) = try {

@@ -34,6 +34,8 @@ data class Spec(
     /** Flattened component names of the apps to open. */
     val apps: List<String> = emptyList(),
     val labels: Boolean = false,
+    /** Shrink the shape around the apps instead of filling the widget. */
+    val fit: Boolean = true,
 ) {
     fun currentPhoto(): String? = if (photos.isEmpty()) null else photos[photoIndex.mod(photos.size)]
 
@@ -49,6 +51,7 @@ data class Spec(
         put("showDate", showDate)
         put("apps", JSONArray(apps))
         put("labels", labels)
+        put("fit", fit)
     }.toString()
 
     companion object {
@@ -67,6 +70,7 @@ data class Spec(
                 showDate = o.optBoolean("showDate", true),
                 apps = list("apps"),
                 labels = o.optBoolean("labels"),
+                fit = o.optBoolean("fit", true),
             )
         } catch (e: Exception) {
             null
@@ -75,7 +79,7 @@ data class Spec(
         fun defaultFor(content: Content) = when (content) {
             Content.PHOTO -> Spec(content, Shape.STAMP, "paper")
             Content.CLOCK -> Spec(content, Shape.CIRCLE, "ink")
-            Content.APPS -> Spec(content, Shape.TICKET, "cream")
+            Content.APPS -> Spec(content, Shape.FILM, "ink")
         }
     }
 }
@@ -98,8 +102,14 @@ object Store {
         }
     }
 
-    fun spec(ctx: Context, id: Int): Spec =
-        prefs(ctx).getString("spec_$id", null)?.let { Spec.fromJson(it) } ?: Spec.defaultFor(contentOf(ctx, id))
+    /** A widget's settings; a new one gets its kind's defaults (and an apps widget four apps), saved. */
+    fun spec(ctx: Context, id: Int): Spec {
+        prefs(ctx).getString("spec_$id", null)?.let { Spec.fromJson(it) }?.let { return it }
+        val content = contentOf(ctx, id)
+        val fresh = Spec.defaultFor(content).let { if (content == Content.APPS) it.copy(apps = Apps.suggested(ctx)) else it }
+        prefs(ctx).edit().putString("spec_$id", fresh.toJson()).apply()
+        return fresh
+    }
 
     fun put(ctx: Context, id: Int, spec: Spec) {
         val old = prefs(ctx).getString("spec_$id", null)?.let { Spec.fromJson(it) }

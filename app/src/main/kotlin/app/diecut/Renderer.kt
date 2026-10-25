@@ -56,7 +56,10 @@ object Renderer {
         val c = Canvas(bmp)
         c.scale(u, u)
         val pal = Palettes.resolve(ctx, spec.palette)
-        val cut = spec.shape.cut(w, h)
+        // The shape fills the widget, or (apps that fit) only as much of it as the icons need.
+        val box = box(spec, w, h)
+        c.translate(box.left, box.top)
+        val cut = spec.shape.cut(box.width(), box.height(), cells(spec, box.width(), box.height()))
         c.drawPath(cut.outline, fill(pal.paper))
         cut.band?.let { c.drawPath(it, fill(pal.ink)) }
         var taps = emptyList<Tap>()
@@ -64,16 +67,63 @@ object Renderer {
         when (spec.content) {
             Content.PHOTO -> photo(ctx, c, spec, cut, u, pal)
             Content.CLOCK -> {
-                hairline(c, cut, pal)
-                clock = if (spec.clock == ClockStyle.ANALOGUE) analogue(c, cut, pal, preview) else digital(ctx, c, spec, cut, pal, preview)
+                ground(c, cut, pal)
+                // A film's clock sits in its middle frame.
+                val safe = cut.frames?.let { it[it.size / 2] } ?: cut.safe
+                clock = if (spec.clock == ClockStyle.ANALOGUE) analogue(c, safe, pal, preview) else digital(ctx, c, spec, safe, pal, preview)
             }
             Content.APPS -> {
-                hairline(c, cut, pal)
+                ground(c, cut, pal)
                 taps = apps(ctx, c, spec, cut, u, pal)
             }
         }
-        return Face(bmp, u, taps, clock)
+        val dx = box.left
+        val dy = box.top
+        fun RectF.moved() = RectF(left + dx, top + dy, right + dx, bottom + dy)
+        return Face(bmp, u, taps.map { Tap(it.rect.moved(), it.component) }, clock?.let { ClockPlace(it.rect.moved(), it.timeSize, it.dateSize) })
     }
+
+    /** Where in a [w] x [h] dp widget the shape goes. */
+    fun box(spec: Spec, w: Float, h: Float): RectF {
+        val n = spec.apps.size
+        if (spec.content != Content.APPS || !spec.fit || n == 0) return RectF(0f, 0f, w, h)
+        var bw: Float
+        var bh: Float
+        if (spec.shape == Shape.FILM) {
+            // Exactly a frame per app, along the widget's long side.
+            if (w >= h) {
+                bw = min(w, Shape.filmLength(h, n, 1f)); bh = h
+            } else {
+                bw = w; bh = min(h, Shape.filmLength(w, n, 1f))
+            }
+        } else {
+            val m = min(w, h) * 0.12f
+            val labelH = if (spec.labels) labelSize(w - 2 * m, h - 2 * m) * 1.6f else 0f
+            val fit = Grid.fit(n, w - 2 * m, h - 2 * m, labelH)
+            val cell = fit.icon / 0.72f
+            bw = min(w, fit.cols * cell + 2 * m)
+            bh = min(h, fit.rows * (cell + labelH) + 2 * m)
+            when (spec.shape) {
+                // Round shapes want to be square.
+                Shape.CIRCLE, Shape.SCALLOP -> { val s = min(max(bw, bh), min(w, h)); bw = s; bh = s }
+                // Room for the notches.
+                Shape.TICKET -> bw = min(w, bw + min(bw, bh) * 0.3f)
+                Shape.ARCH -> bh = min(h, bh + bw * 0.25f)
+                else -> {}
+            }
+        }
+        return RectF((w - bw) / 2, (h - bh) / 2, (w + bw) / 2, (h + bh) / 2)
+    }
+
+    /** How many frames a film of [w] x [h] dp has: one per app, or as many as fill it (photos take turns along it). */
+    fun cells(spec: Spec, w: Float, h: Float): Int {
+        if (spec.shape != Shape.FILM) return 1
+        val aspect = if (spec.content == Content.PHOTO) 1.3f else 1f
+        val fits = Shape.filmFits(max(w, h), min(w, h), aspect)
+        return if (spec.content == Content.APPS) max(1, if (spec.fit) spec.apps.size else max(spec.apps.size, fits)) else fits
+    }
+
+    private fun labelSize(w: Float, h: Float) = (min(w, h) * 0.075f).coerceIn(8f, 12f)
 
     /** A small picture of [shape] for the editor's shape row. */
     fun thumb(ctx: Context, shape: Shape, palette: String, w: Float, h: Float, u: Float): Bitmap {
@@ -81,7 +131,7 @@ object Renderer {
         val c = Canvas(bmp)
         c.scale(u, u)
         val pal = Palettes.resolve(ctx, palette)
-        val cut = shape.cut(w, h)
+        val cut = shape.cut(w, h, if (shape == Shape.FILM) Shape.filmFits(max(w, h), min(w, h), 1f) else 1)
         c.drawPath(cut.outline, fill(pal.paper))
         cut.band?.let { c.drawPath(it, fill(pal.ink)) }
         c.drawPath(cut.window, fill(mix(pal.paper, pal.ink, 0.22f)))
@@ -91,21 +141,39 @@ object Renderer {
     // ------------------------------------------------------------- content
 
     private fun photo(ctx: Context, c: Canvas, spec: Spec, cut: Cut, u: Float, pal: Palette) {
-        val win = cut.windowRect
-        val name = spec.currentPhoto()
-        val pic = name?.let { load(File(Store.photoDir(ctx), it), (max(win.width(), win.height()) * u).roundToInt()) }
-        if (pic == null) {
+        if (spec.photos.isEmpty()) {
             c.drawPath(cut.window, fill(mix(pal.paper, pal.ink, 0.1f)))
             centred(c, "Tap to add a photo", cut.safe, min(13f, cut.safe.width() / 11f), pal.ink, Typeface.DEFAULT)
             return
         }
-        // Cropped to fill the window, centred.
+        val frames = cut.frames
+        if (frames == null) {
+            val win = cut.windowRect
+            val pic = load(File(Store.photoDir(ctx), spec.currentPhoto()!!), (max(win.width(), win.height()) * u).roundToInt())
+            picture(c, pic, win, cut.window, pal)
+            return
+        }
+        // A film: the photos one after another along it, starting with the current one.
+        val cache = HashMap<String, Bitmap?>()
+        for ((i, f) in frames.withIndex()) {
+            val name = spec.photos[(spec.photoIndex + i).mod(spec.photos.size)]
+            val pic = cache.getOrPut(name) { load(File(Store.photoDir(ctx), name), (max(f.width(), f.height()) * u).roundToInt()) }
+            picture(c, pic, f, Path().apply { addRoundRect(f, 2f, 2f, Path.Direction.CW) }, pal)
+        }
+    }
+
+    /** [pic] cropped to fill [win], centred, inside [clip]. */
+    private fun picture(c: Canvas, pic: Bitmap?, win: RectF, clip: Path, pal: Palette) {
+        if (pic == null) {
+            c.drawPath(clip, fill(mix(pal.paper, pal.ink, 0.1f)))
+            return
+        }
         val k = max(win.width() / pic.width, win.height() / pic.height)
         val m = Matrix().apply {
             setScale(k, k)
             postTranslate(win.centerX() - pic.width * k / 2, win.centerY() - pic.height * k / 2)
         }
-        c.drawPath(cut.window, Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG).apply {
+        c.drawPath(clip, Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG).apply {
             shader = BitmapShader(pic, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP).apply { setLocalMatrix(m) }
         })
     }
@@ -123,8 +191,7 @@ object Renderer {
         null
     }
 
-    private fun digital(ctx: Context, c: Canvas, spec: Spec, cut: Cut, pal: Palette, preview: Boolean): ClockPlace {
-        val safe = cut.safe
+    private fun digital(ctx: Context, c: Canvas, spec: Spec, safe: RectF, pal: Palette, preview: Boolean): ClockPlace {
         val face = Typeface.create(spec.clock.family, Typeface.NORMAL)
         val probe = Paint().apply { typeface = face; textSize = 100f }
         val perSize = probe.measureText("00:00") / 100f
@@ -146,8 +213,7 @@ object Renderer {
         return ClockPlace(RectF(safe), size, dateSize)
     }
 
-    private fun analogue(c: Canvas, cut: Cut, pal: Palette, preview: Boolean): ClockPlace {
-        val safe = cut.safe
+    private fun analogue(c: Canvas, safe: RectF, pal: Palette, preview: Boolean): ClockPlace {
         val side = min(safe.width(), safe.height())
         val box = RectF(safe.centerX() - side / 2, safe.centerY() - side / 2, safe.centerX() + side / 2, safe.centerY() + side / 2)
         val r = side / 2
@@ -218,23 +284,32 @@ object Renderer {
             centred(c, "Tap to choose apps", safe, min(13f, safe.width() / 10f), pal.ink, Typeface.DEFAULT)
             return emptyList()
         }
-        val labelSize = if (spec.labels) (min(safe.width(), safe.height()) * 0.075f).coerceIn(8f, 12f) else 0f
-        val fit = Grid.fit(entries.size, safe.width(), safe.height(), if (spec.labels) labelSize * 1.6f else 0f)
+        val frames = cut.frames
+        val labelSize = if (!spec.labels) 0f else if (frames != null) labelSize(frames[0].width(), frames[0].height()) * 0.85f else labelSize(safe.width(), safe.height())
+        val labelH = if (spec.labels) labelSize * 1.6f else 0f
+        val fit = Grid.fit(entries.size, safe.width(), safe.height(), labelH)
         val lp = TextPaint(Paint.ANTI_ALIAS_FLAG).apply {
             textSize = labelSize; color = pal.ink; textAlign = Paint.Align.CENTER
             typeface = Typeface.create("sans-serif-medium", Typeface.NORMAL)
         }
-        // The last row is centred when it is short.
+        // A film has a frame for each app (centred along it when there are spare
+        // frames); otherwise a grid, its last row centred when it is short.
+        val first = if (frames != null) (frames.size - entries.size).coerceAtLeast(0) / 2 else 0
         val taps = mutableListOf<Tap>()
         for ((i, e) in entries.withIndex()) {
-            val row = i / fit.cols
-            val inRow = if (row == fit.rows - 1) entries.size - row * fit.cols else fit.cols
-            val col = i % fit.cols
-            val rowLeft = safe.left + (safe.width() - inRow * fit.cellW) / 2
-            val cell = RectF(rowLeft + col * fit.cellW, safe.top + row * fit.cellH, rowLeft + (col + 1) * fit.cellW, safe.top + (row + 1) * fit.cellH)
-            val block = fit.icon + if (spec.labels) labelSize * 1.6f else 0f
+            val cell = if (frames != null) {
+                frames.getOrNull(first + i) ?: break
+            } else {
+                val row = i / fit.cols
+                val inRow = if (row == fit.rows - 1) entries.size - row * fit.cols else fit.cols
+                val col = i % fit.cols
+                val rowLeft = safe.left + (safe.width() - inRow * fit.cellW) / 2
+                RectF(rowLeft + col * fit.cellW, safe.top + row * fit.cellH, rowLeft + (col + 1) * fit.cellW, safe.top + (row + 1) * fit.cellH)
+            }
+            val iconSize = if (frames != null) min(64f, min(cell.width(), cell.height() - labelH) * 0.66f) else fit.icon
+            val block = iconSize + labelH
             val top = cell.centerY() - block / 2
-            val icon = RectF(cell.centerX() - fit.icon / 2, top, cell.centerX() + fit.icon / 2, top + fit.icon)
+            val icon = RectF(cell.centerX() - iconSize / 2, top, cell.centerX() + iconSize / 2, top + iconSize)
             // Icons are drawn at full resolution, not through the dp scale.
             c.save()
             c.scale(1 / u, 1 / u)
@@ -252,7 +327,12 @@ object Renderer {
 
     // ------------------------------------------------------------- helpers
 
-    private fun hairline(c: Canvas, cut: Cut, pal: Palette) {
+    /** Under a clock or apps: a film's frames a shade lighter, any other window a hairline. */
+    private fun ground(c: Canvas, cut: Cut, pal: Palette) {
+        if (cut.frames != null) {
+            c.drawPath(cut.window, fill(mix(pal.paper, pal.ink, 0.13f)))
+            return
+        }
         c.drawPath(cut.window, Paint(Paint.ANTI_ALIAS_FLAG).apply {
             style = Paint.Style.STROKE; strokeWidth = 1f; color = pal.ink; alpha = 46
         })
